@@ -111,24 +111,24 @@
                     },function (captchaObj) {
                         captchaObj.appendTo("#captcha-box")
                         captchaObj.onSuccess(function () {
+                            $.ajax({
+                                type:'POST',
+                                url: "{:url('do_login')}",
+                                data: $('#login_from').serialize(),
+                                dataType:'json',
+                                success:function (response) {
+                                    if (response.code == 200){
+                                        layer.msg(response.message,{icon:6,time:500},function () {
+                                            location.href = "{:url('/Home')}"
+                                        })
+                                    }else{
+                                        layer.msg(response.message,{icon:5,time:500})
+                                    }
+                                }
+                            })
                             
                         })
                     })
-                }
-            })
-            $.ajax({
-                type:'POST',
-                url: "{:url('do_login')}",
-                data: $('#login_from').serialize(),
-                dataType:'json',
-                success:function (response) {
-                    if (response.code == 200){
-                        layer.msg(response.message,{icon:6,time:500},function () {
-                            location.href = "{:url('/Home')}"
-                        })
-                    }else{
-                        layer.msg(response.message,{icon:5,time:500})
-                    }
                 }
             })
         })
