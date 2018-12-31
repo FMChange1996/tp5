@@ -62,9 +62,6 @@
                                 <input class="form-control" type="password" name="password" id="password" />
                             </div>
                             <div id="captcha-box" class="form-group">
-                                <div>
-
-                                </div>
                             </div>
                             <div class="form-group no-margin">
                                 <button type="button" class="btn btn-primary btn-block" id="login">
@@ -92,48 +89,112 @@
         var layer = layui.layer;
     });
 
-    //按钮提交验证
-    $(function () {
-        $('#login').on('click',function (event) {
-            var captchaBox = document.getElementById('#captcha-box');
-            $.ajax({
-                url:"{:url('/api/geetest/getsteam')}",
-                type:'get',
-                dataType:'json',
-                success:function (data) {
-                    initGeetest({
-                        gt:data.gt,
-                        challenge:data.challenge,
-                        new_captcha:data.new_captcha,
-                        product:'popup',
-                        width:"100%",
-                        offline:!data.success
-                    },function (captchaObj) {
-                        captchaObj.appendTo("#captcha-box")
-                        captchaObj.onSuccess(function () {
-                            $.ajax({
-                                type:'POST',
-                                url: "{:url('do_login')}",
-                                data: $('#login_from').serialize(),
-                                dataType:'json',
-                                success:function (response) {
-                                    if (response.code == 200){
-                                        layer.msg(response.message,{icon:6,time:500},function () {
-                                            location.href = "{:url('/Home')}"
-                                        })
-                                    }else{
-                                        layer.msg(response.message,{icon:5,time:500})
+
+
+    var handler = function (captchaObj) {
+        captchaObj.appendTo('#captcha-box');
+        //按钮登录操作
+        $(function () {
+            $('#login').on('click', function (event) {
+                var result = captchaObj.getValidate();
+                if (!result) {
+                    layer.msg("请先完成验证！");
+                } else {
+                    $.ajax({
+                        url: "{:url('/api/geetest/VerifyCaptcha')}",
+                        type: 'POST',
+                        data: {
+                            geetest_challenge: result.geetest_challenge,
+                            geetest_validate: result.geetest_validate,
+                            geetest_seccode: result.geetest_seccode,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status == "success") {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "{:url('do_login')}",
+                                    data: $('#login_from').serialize(),
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        if (response.code == 200) {
+                                            layer.msg(response.message, {icon: 6, time: 500}, function () {
+                                                location.href = "{:url('/Home')}"
+                                            })
+                                        } else {
+                                            layer.msg(response.message, {icon: 5, time: 500})
+                                        }
                                     }
-                                }
-                            })
-                        })
+                                })
+                            } else {
+                                captchaObj.reset();
+                            }
+                        }
                     })
                 }
             })
         })
-    })
+        //回车登录操作
+        $(document).keyup(function (event) {
+            if (event.keyCode == 13){
+                var result = captchaObj.getValidate();
+                if (!result) {
+                    layer.msg("请先完成验证！");
+                } else {
+                    $.ajax({
+                        url: "{:url('/api/geetest/VerifyCaptcha')}",
+                        type: 'POST',
+                        data: {
+                            geetest_challenge: result.geetest_challenge,
+                            geetest_validate: result.geetest_validate,
+                            geetest_seccode: result.geetest_seccode,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status == "success") {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "{:url('do_login')}",
+                                    data: $('#login_from').serialize(),
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        if (response.code == 200) {
+                                            layer.msg(response.message, {icon: 6, time: 500}, function () {
+                                                location.href = "{:url('/Home')}"
+                                            })
+                                        } else {
+                                            layer.msg(response.message, {icon: 5, time: 500})
+                                        }
+                                    }
+                                })
+                            } else {
+                                captchaObj.reset();
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    };
 
-    //行为验证
+    // 行为验证
+    $.ajax({
+        url:"{:url('/api/geetest/getsteam')}",
+        type:'get',
+        dataType:'json',
+        success:function (data) {
+            initGeetest({
+                gt:data.gt,
+                challenge:data.challenge,
+                new_captcha:data.new_captcha,
+                product:'popup',
+                width:"100%",
+                offline:!data.success
+            },handler);
+        }
+    },)
+
+
 
 </script>
 </body>
