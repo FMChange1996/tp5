@@ -14,7 +14,7 @@ use think\Controller;
 
 class Geetest extends Controller
 {
-    
+
     //使用GET返回challenge和captcha_id
     public function GetSteam(){
         $geetest = new GeetestLib(env('GeeId'),env('GeeKey'));
@@ -29,14 +29,6 @@ class Geetest extends Controller
         $_SESSION['user_id'] = $data['user_id'];
         echo $geetest -> get_response_str();
     }
-
-    //输出二次验证结果
-    public function VerifyLoginServlet(){
-        $geetest = new GeetestLib(env('GeeId'),env('GeeKey'));
-        $user_id = $_SESSION['user_id'];
-        if ($_SESSION['gtserver'] == 1){
-            $result = $geetest-> success_validate($_POST['geetest_challenge'].$_POST('geetest_validate'),$_POST['geetest_seccode']);
-        }
-    }
+    
 
 }
