@@ -25,36 +25,24 @@
     <!--/meta 作为公共模版分离出去-->
 
     <title>{block name="title"}标题{/block}</title>
-    <meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-    <meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
 
 <!--_menu 作为公共模版分离出去-->
 <aside class="Hui-admin-aside-wrapper">
     <div class="Hui-admin-logo-wrapper">
-        <a class="logo navbar-logo" href="/aboutHui.shtml">
+        <a class="logo navbar-logo" href="#">
             <i class="va-m iconpic global-logo"></i>
-            <span class="va-m">H-ui.admin</span>
+            <span class="va-m">OA办公系统</span>
         </a>
     </div>
     <div class="Hui-admin-menu-dropdown bk_2">
         <dl id="menu-article" class="Hui-menu">
-            <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
+            <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe687;</i> 订单管理<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="article-list.html" title="资讯管理">资讯管理</a></li>
-                    <li><a onclick="article_add('添加资讯','article-add.html')" href="javascript:;" title="新增资讯">新增资讯</a></li>
-                    <li>
-                        <dl class="Hui-menu">
-                            <dt class="Hui-menu-title">二级菜单<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
-                            <dd class="Hui-menu-item">
-                                <ul>
-                                    <li><a href="#" title="">三级菜单</a></li>
-                                </ul>
-                            </dd>
-                        </dl>
-                    </li>
+                    <li><a href="{:url('/user/orders/wait_out')}" title="未发货">未发货订单</a></li>
+                    <li><a href="{:url('/user/orders/shipped')}" title="已发货">已发货订单</a></li>
                 </ul>
             </dd>
         </dl>

@@ -13,8 +13,20 @@ use think\Controller;
 
 class Orders extends Controller
 {
-    public function index(){
+    protected $middleware = ['\app\http\middleware\Auth'];
 
+    public function index(){
+        return $this -> display();
+    }
+
+    //未发货订单列表
+    public function Wait_Out(){
+        return view('orders/wait_out',['title' => '待发货']);
+    }
+
+    //已发货订单列表
+    public function Shipped(){
+        return view('orders/shipped',['title' => '已发货']);
     }
 
 }
