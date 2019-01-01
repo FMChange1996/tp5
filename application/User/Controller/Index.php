@@ -13,6 +13,8 @@ use think\Controller;
 
 class Index extends Controller
 {
+    protected $middleware = ['\app\http\middleware\Auth'];
+
     public function index(){
         return view('index/welcome',['title' => '首页']);
     }

@@ -14,7 +14,7 @@ use think\Controller;
 class Orders extends Controller
 {
     public function index(){
-        
+
     }
 
 }
