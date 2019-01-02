@@ -46,12 +46,7 @@ class Index extends Controller
     }
 
     public function Login_Out(){
-        if (Session::delete('token',null)){
-            $this -> success('退出成功，正在跳转','/');
-        }else{
-            $this -> error('退出失败');
-        }
-
+        Session::delete('token');
     }
 
 }
