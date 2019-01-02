@@ -21,7 +21,7 @@ class Index extends Controller
         return view('index/login');
     }
 
-    public function Registe(){
+    public function Register(){
         return view('index/registe');
     }
 
