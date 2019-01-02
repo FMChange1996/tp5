@@ -12,6 +12,7 @@ namespace app\Index\Controller;
 use app\Index\Model\Users;
 use think\Controller;
 use think\facade\Request;
+use think\facade\Session;
 
 
 class Index extends Controller
@@ -30,8 +31,8 @@ class Index extends Controller
             $password = hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2);
             $data = Users::where('username',$username) -> find();
             if ($data['username'] == $username && $data['password'] == $password){
-                session('token','djaor230few024t');
-                session('username',$username);
+                Session::set('token','fo2j308g2j08233th[w2tj0f2');
+                Session::set('username',$username);
                 return ['code' => 200 , 'message' => '登录成功'];
             }elseif ($data == null){
                 return ['code' => 400 , 'message' => '该用户不存在！'];
@@ -45,10 +46,10 @@ class Index extends Controller
     }
 
     public function Login_Out(){
-        if (session(null)){
-            $this -> error('退出失败');
-        }else{
+        if (Session::pull('token')){
             $this -> success('退出成功，正在跳转','/');
+        }else{
+            $this -> error('退出失败');
         }
     }
 
