@@ -41,8 +41,8 @@
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe627;</i> 订单管理<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="{:url('/User/Orders/Wait_Out')}" title="未发货">未发货订单</a></li>
-                    <li><a href="{:url('/User/Orders/Shipped')}" title="已发货">已发货订单</a></li>
+                    <li><a href="{:url('User/Orders/Wait_Out')}" title="未发货">未发货订单</a></li>
+                    <li><a href="{:url('User/Orders/Shipped')}" title="已发货">已发货订单</a></li>
                 </ul>
             </dd>
         </dl>
@@ -50,7 +50,7 @@
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe670;</i> 仓储管理<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="{:url('/User/Depot')}" >库存清单</a></li>
+                    <li><a href="{:url('User/Depot')}" >库存清单</a></li>
                 </ul>
             </dd>
         </dl>
@@ -58,8 +58,8 @@
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe70c;</i> 售后管理<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="{:url('/User/CustomerService')}" >售后登记</a></li>
-                    <li><a href="{:url('/User/CustomerService/Pay_Out')}" >售后支出</a></li>
+                    <li><a href="{:url('User/CustomerService')}" >售后登记</a></li>
+                    <li><a href="{:url('User/CustomerService/Pay_Out')}" >售后支出</a></li>
                 </ul>
             </dd>
         </dl>
@@ -67,7 +67,7 @@
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe60d;</i> 跟踪管理<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="{:url('/User/Customer')}" >客户列表</a></li>
+                    <li><a href="{:url('User/Customer')}" >客户列表</a></li>
                 </ul>
             </dd>
         </dl>
@@ -75,7 +75,7 @@
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe6b7;</i> 返现管理<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="{:url('/User/FanXian')}" >返现列表</a></li>
+                    <li><a href="{:url('User/FanXian')}" >返现列表</a></li>
                 </ul>
             </dd>
         </dl>
@@ -83,9 +83,9 @@
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe63c;</i> 系统管理<i class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li><a href="{:url('/User/System/User_List')}" >管理员列表</a></li>
-                    <li><a href="{:url('/User/System/User_Rule')}" >权限管理</a></li>
-                    <li><a href="{:url('/User/System/User_Info')}">个人中心</a></li>
+                    <li><a href="{:url('User/System/User_List')}" >管理员列表</a></li>
+                    <li><a href="{:url('User/System/User_Rule')}" >权限管理</a></li>
+                    <li><a href="{:url('User/System/User_Info')}">个人中心</a></li>
                 </ul>
             </dd>
         </dl>
@@ -111,9 +111,9 @@
                         <li>超级管理员</li>
                         <li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">{$Think.session.username}<i class="Hui-iconfont">&#xe6d5;</i></a>
                             <ul class="dropDown-menu menu radius box-shadow">
-                                <li><a href="{:url('/User/System/User_Info')}">个人信息</a></li>
+                                <li><a href="{:url('User/System/User_Info')}">个人信息</a></li>
                                 <li><a href="#">切换账户</a></li>
-                                <li><a href="{:url('/Index/Index/Login_Out')}">退出</a></li>
+                                <li><a href="{:url('Index/Index/Login_Out')}">退出</a></li>
                             </ul>
                         </li>
                         <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
