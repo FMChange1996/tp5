@@ -40,14 +40,18 @@ class Index extends Controller
                 return ['code' => 400 , 'message' => '账号密码不正确！'];
             }
         }else{
-            return redirect('/index');
+            return redirect('/');
         }
 
     }
 
     public function Login_Out(){
-        Session::clear('token');
-        $this -> redirect('Index/Index',302);
+        if (Session::delete('token',null)){
+            $this -> success('退出成功，正在跳转','/');
+        }else{
+            $this -> error('退出失败');
+        }
+
     }
 
 }
