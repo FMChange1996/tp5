@@ -30,7 +30,7 @@ class Orders extends Controller
         return view('orders/shipped',['title' => '已发货']);
     }
 
-
+    //添加订单操作
     public function Order_Add(){
         if (Request::method('POST')) {
 
