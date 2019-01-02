@@ -22,7 +22,7 @@ class Index extends Controller
     }
 
     public function Register(){
-        return view('index/registe');
+        return view('index/register');
     }
 
     public function do_login(){
