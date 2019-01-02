@@ -15,7 +15,7 @@ class Customer extends Controller
 {
     protected $middleware = ['\app\http\middleware\Auth'];
 
-    public function index(){
+    public function Index(){
 
     }
 

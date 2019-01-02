@@ -15,7 +15,7 @@ class Depot extends Controller
 {
     protected $middleware = ['\app\http\middleware\Auth'];
 
-    public function index(){
+    public function Index(){
         return view('depot/index',['title' => '仓储管理']);
     }
 }

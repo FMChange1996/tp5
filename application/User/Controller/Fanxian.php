@@ -15,8 +15,8 @@ class Fanxian extends Controller
 {
     protected $middleware = ['\app\http\middleware\Auth'];
 
-    public function index(){
-        return $this -> display();
+    public function Index(){
+
     }
 
 }
