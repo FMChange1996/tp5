@@ -10,6 +10,7 @@ namespace app\User\Controller;
 
 
 use think\Controller;
+use think\facade\Request;
 
 class Orders extends Controller
 {
@@ -29,4 +30,12 @@ class Orders extends Controller
         return view('orders/shipped',['title' => '已发货']);
     }
 
+
+    public function Order_Add(){
+        if (Request::method('POST')) {
+
+        }else{
+            return "";
+        }
+    }
 }
