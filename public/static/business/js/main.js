@@ -55,7 +55,6 @@ function article_add(title,url){
 		title: title,
 		content: url
 	});
-	layer.full(index);
 }
 
 /*资讯-编辑*/

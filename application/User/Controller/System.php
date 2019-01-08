@@ -15,15 +15,15 @@ class System extends Controller
     protected $middleware = ['\app\http\middleware\Auth'];
 
     public function User_List(){
-
+        return view('system/user_list',['title' => '管理员列表']);
     }
 
     public function User_Rule(){
-
+        return view('system/user_rule',['title' => '管理员权限']);
     }
 
     public function User_Info(){
-
+        return view('system/user_info',['title' => '个人信息']);
     }
 
 }

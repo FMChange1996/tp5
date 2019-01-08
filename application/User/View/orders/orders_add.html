@@ -1,0 +1,98 @@
+{extend name="base1" /}
+
+{block name="title"}{$title}{/block}
+
+{block name="body"}
+
+
+<article class="Hui-admin-page-container">
+    <form class="form form-horizontal" id="order_add">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>自动识别：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <textarea class="textarea" id="auto_address" name="audo_address"></textarea>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>收件人姓名：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="名字" id="name" name="name">
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>收件人手机号：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" id="mobile" name="mobile" placeholder="手机号">
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>收件人地址：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" id="address" name="address" placeholder="收件地址">
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>清单：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <textarea class="textarea" name="goods" id="goods"></textarea>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>加急类型：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <span class="select-box">
+                    <select class="select" name="urgent">
+                        <option selected>选择</option>
+                        <option value="0">正常</option>
+                        <option value="1">加急</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-primary radius" type="button" id="submit"><i class="Hui-iconfont">&#xe632;</i> 添加订单</button>
+                <button onClick="windows_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+    $('#submit').on('click',function () {
+        $.ajax({
+            url:'',
+            type:'post',
+            data:$('#order_add').serialize(),
+            dataType:'json',
+            success:function () {
+
+            }
+        })
+    })
+
+
+    //取消按钮关闭当前页面
+    function windows_close(){
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+
+    //地址自动识别
+    $('#auto_address').blur(function () {
+        var auto_address = $('#auto_address').val();
+        if (auto_address == null){
+
+        } else {
+            var address = auto_address.split("，");
+            document.getElementById('name').value = address[0];
+            document.getElementById('mobile').value = address[1];
+            document.getElementById('address').value = address[2];
+        }
+    });
+</script>
+{/block}
+
+

@@ -32,10 +32,6 @@ class Orders extends Controller
 
     //添加订单操作
     public function Order_Add(){
-        if (Request::method('POST')) {
-
-        }else{
-            return "";
-        }
+        return view('orders/orders_add',['title' => '添加订单']);
     }
 }
