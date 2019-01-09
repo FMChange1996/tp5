@@ -50,7 +50,6 @@ class Orders extends Controller
                 'goods.require' => '发货清单不能为空',
                 'urgent.require' => '紧急状态必须选择',
                 'urgent.integer' => '紧急状态未选择'
-
             ];
             $validate = Validate::make([
                     'name' => 'require',
@@ -80,6 +79,5 @@ class Orders extends Controller
         }else{
             return view('orders/orders_add',['title' => '添加订单']);
         }
-
     }
 }
