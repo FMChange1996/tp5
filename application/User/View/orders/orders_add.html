@@ -63,12 +63,18 @@
 <script type="text/javascript">
     $('#submit').on('click',function () {
         $.ajax({
-            url:'',
+            url:'{:url('/user/orders/order_add')}',
             type:'post',
             data:$('#order_add').serialize(),
             dataType:'json',
-            success:function () {
-
+            success:function (response) {
+                if (response.code == 200){
+                    layer.msg(response.message,{icon:6,time:700,end:function () {
+                            windows_close();
+                        }})
+                } else{
+                    layer.msg(response.message,{icon:5,time:700});
+                }
             }
         })
     })
