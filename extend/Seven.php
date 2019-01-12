@@ -18,7 +18,7 @@ class Seven
     private $channel;
 
 
-    public function __construct($sckey){
+    public function __construct($sckey=""){
         $this -> sckey = $sckey;
     }
 
