@@ -19,7 +19,7 @@ class Seven
 
 
     public function __construct($sckey){
-        $this-> sckey = $sckey;
+        $this -> sckey = $sckey;
     }
 
     public function SetTitle($text){
