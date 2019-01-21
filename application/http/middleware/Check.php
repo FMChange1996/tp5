@@ -2,7 +2,7 @@
 
 namespace app\http\middleware;
 
-class Auth
+class Check
 {
     public function handle($request, \Closure $next)
     {

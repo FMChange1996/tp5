@@ -13,7 +13,7 @@ use think\Controller;
 
 class Depot extends Controller
 {
-    protected $middleware = ['\app\http\middleware\Auth'];
+    protected $middleware = ['\app\http\middleware\Check'];
 
     public function Index(){
         return view('depot/index',['title' => '仓储管理']);

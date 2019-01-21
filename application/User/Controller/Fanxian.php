@@ -14,7 +14,7 @@ use think\Controller;
 
 class Fanxian extends Controller
 {
-    protected $middleware = ['\app\http\middleware\Auth'];
+    protected $middleware = ['\app\http\middleware\Check'];
 
     public function Index(){
         return view('fanxian/index',['title' => '返现列表']);

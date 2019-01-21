@@ -15,7 +15,7 @@ use app\User\Model\Orders as OrdersModel;
 
 class Orders extends Controller
 {
-    protected $middleware = ['\app\http\middleware\Auth'];
+    protected $middleware = ['\app\http\middleware\Check'];
 
     public function index(){
         return $this -> display();

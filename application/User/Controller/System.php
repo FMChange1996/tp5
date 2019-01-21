@@ -12,7 +12,7 @@ use think\Controller;
 
 class System extends Controller
 {
-    protected $middleware = ['\app\http\middleware\Auth'];
+    protected $middleware = ['\app\http\middleware\Check'];
 
     public function User_List(){
         return view('system/user_list',['title' => '管理员列表']);

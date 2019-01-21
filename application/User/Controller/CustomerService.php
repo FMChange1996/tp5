@@ -13,7 +13,7 @@ use think\Controller;
 
 class CustomerService extends Controller
 {
-    protected $middleware = ['\app\http\middleware\Auth'];
+    protected $middleware = ['\app\http\middleware\Check'];
 
     public function Index(){
         return view('customerservice/index',['title' => '售后登记']);
