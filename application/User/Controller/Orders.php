@@ -18,7 +18,7 @@ class Orders extends Controller
     protected $middleware = ['\app\http\middleware\Check'];
 
     public function index(){
-        return $this -> display();
+        return $this -> error("页面不存在！");
     }
 
     //未发货订单列表

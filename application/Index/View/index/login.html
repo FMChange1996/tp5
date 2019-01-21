@@ -118,7 +118,7 @@
                                     success: function (response) {
                                         if (response.code == 200) {
                                             layer.msg(response.message, {icon: 6, time: 500}, function () {
-                                                location.href = "{:url('/User/Index')}"
+                                                location.href = "{:url('/user/index')}"
                                             })
                                         } else {
                                             layer.msg(response.message, {icon: 5, time: 500})

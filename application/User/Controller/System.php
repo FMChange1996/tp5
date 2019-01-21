@@ -26,4 +26,8 @@ class System extends Controller
         return view('system/user_info',['title' => '个人信息']);
     }
 
+    public function Setting(){
+
+    }
+
 }
