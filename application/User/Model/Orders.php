@@ -12,5 +12,20 @@ use think\Model;
 
 class Orders extends Model
 {
+    public function getUrgentAttr($value){
+        $urgent = [
+            '0' => '正常',
+            '1' => '加急'
+        ];
+        return $urgent[$value];
+    }
+
+    public function getStatusAttr($value){
+        $status = [
+            '0' => '未发货',
+            '1' => '已发货'
+        ];
+        return $status[$value];
+    }
 
 }

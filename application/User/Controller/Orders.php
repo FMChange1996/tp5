@@ -23,7 +23,8 @@ class Orders extends Controller
 
     //未发货订单列表
     public function Wait_Out(){
-        return view('orders/wait_out',['title' => '待发货']);
+        $list = OrdersModel::paginate(10);
+        return view('orders/wait_out',['title' => '待发货', 'list' => $list]);
     }
 
     //已发货订单列表

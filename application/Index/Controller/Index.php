@@ -42,7 +42,6 @@ class Index extends Controller
         }else{
             return redirect('/');
         }
-
     }
 
     public function Login_Out(){

@@ -11,7 +11,7 @@ namespace app\User\Controller;
 
 use think\Controller;
 
-class CustomerService extends Controller
+class Customerservice extends Controller
 {
     protected $middleware = ['\app\http\middleware\Check'];
 
