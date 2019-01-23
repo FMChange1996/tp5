@@ -10,9 +10,9 @@
 namespace app\User\Controller;
 
 
-use think\Controller;
+use app\User\Command\Base;
 
-class Fanxian extends Controller
+class Fanxian extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 

@@ -70,7 +70,9 @@
             success:function (response) {
                 if (response.code == 200){
                     layer.msg(response.message,{icon:6,time:700,end:function () {
-                            windows_close();
+                            var index = window.parent.location;
+                            windows_close(index);
+                            window.location.href = "";
                         }})
                 } else{
                     layer.msg(response.message,{icon:5,time:700});

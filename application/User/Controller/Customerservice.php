@@ -9,9 +9,9 @@
 
 namespace app\User\Controller;
 
-use think\Controller;
+use app\User\Command\Base;
 
-class Customerservice extends Controller
+class Customerservice extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 

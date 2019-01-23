@@ -8,10 +8,9 @@
 
 namespace app\User\Controller;
 
+use app\User\Command\Base;
 
-use think\Controller;
-
-class Depot extends Controller
+class Depot extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 

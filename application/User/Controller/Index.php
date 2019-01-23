@@ -8,15 +8,16 @@
 
 namespace app\User\Controller;
 
+use app\User\Command\Base;
+use app\User\Model\Orders;
 
-use think\Controller;
-
-class Index extends Controller
+class Index extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 
     public function index(){
-        return view('index/welcome',['title' => '首页']);
+        $orders_count = Orders::count();
+        return view('index/welcome',['title' => '首页' , 'order_count' => $orders_count ]);
     }
 
 }

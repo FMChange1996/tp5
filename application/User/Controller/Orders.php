@@ -8,12 +8,12 @@
 
 namespace app\User\Controller;
 
-use think\Controller;
+use app\User\Command\Base;
 use think\facade\Request;
 use think\Validate;
 use app\User\Model\Orders as OrdersModel;
 
-class Orders extends Controller
+class Orders extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 
@@ -24,7 +24,7 @@ class Orders extends Controller
     //未发货订单列表
     public function Wait_Out(){
         $list = OrdersModel::paginate(10);
-        return view('orders/wait_out',['title' => '待发货', 'list' => $list]);
+        return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
     }
 
     //已发货订单列表
