@@ -15,7 +15,8 @@ use think\facade\Request;
 
 class Base extends Controller
 {
-    protected function __initialize(){
+    protected function initialize()
+    {
         $uid = session('uid');
         if ($uid == 1){
             return true;
