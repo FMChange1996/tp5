@@ -14,15 +14,15 @@ class System extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 
-    public function User_List(){
+    public function UserList(){
         return view('system/user_list',['title' => '管理员列表']);
     }
 
-    public function User_Rule(){
+    public function UserRule(){
         return view('system/user_rule',['title' => '管理员权限']);
     }
 
-    public function User_Info(){
+    public function UserInfo(){
         return view('system/user_info',['title' => '个人信息']);
     }
 

@@ -22,7 +22,7 @@ class Orders extends Base
     }
 
     //未发货订单列表
-    public function Wait_Out(){
+    public function WaitOut(){
         $list = OrdersModel::paginate(10);
         return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
     }
@@ -33,7 +33,7 @@ class Orders extends Base
     }
 
     //添加订单操作
-    public function Order_Add(){
+    public function OrderAdd(){
         if (Request::isPost()){
             $data = [
                 'name' => Request::param('name'),
