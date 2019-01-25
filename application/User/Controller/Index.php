@@ -8,10 +8,10 @@
 
 namespace app\User\Controller;
 
-use app\User\Command\Base;
 use app\User\Model\Orders;
+use think\Controller;
 
-class Index extends Base
+class Index extends Controller
 {
     protected $middleware = ['\app\http\middleware\Check'];
 
