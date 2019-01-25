@@ -9,6 +9,7 @@
 namespace app\User\Controller;
 
 use app\User\Command\Base;
+use app\User\Model\Rule;
 
 class System extends Base
 {
@@ -19,7 +20,8 @@ class System extends Base
     }
 
     public function UserRule(){
-        return view('system/user_rule',['title' => '管理员权限']);
+        $list = Rule::select();
+        return view('system/user_rule',['title' => '管理员权限' , 'list' => $list]);
     }
 
     public function UserInfo(){
@@ -28,6 +30,10 @@ class System extends Base
 
     public function Setting(){
 
+    }
+
+    public function UserRole(){
+        return view('system/user_role',['title' => '角色管理']);
     }
 
 }

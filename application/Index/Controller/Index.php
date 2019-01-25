@@ -31,7 +31,7 @@ class Index extends Controller
             $password = hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2);
             $data = Users::where('username',$username) -> find();
             if ($data['username'] == $username && $data['password'] == $password){
-                Session::set('uid',$data['id']);
+                Session::set('uid',$data['uid']);
                 Session::set('token','fo2j308g2j08233th[w2tj0f2');
                 Session::set('username',$username);
                 return ['code' => 200 , 'message' => '登录成功'];

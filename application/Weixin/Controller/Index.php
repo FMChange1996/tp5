@@ -6,7 +6,7 @@
  * Time: 17:09
  */
 
-namespace app\Weixin;
+namespace app\Weixin\Controller;
 
 
 use think\Controller;
@@ -14,7 +14,7 @@ use think\Controller;
 class Index extends Controller
 {
    public function index(){
-
+        return "weixin";
    }
 
 }

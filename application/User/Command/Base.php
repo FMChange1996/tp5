@@ -21,8 +21,8 @@ class Base extends Controller
         if ($uid == 1){
             return true;
         }
-        $userArr = Db::name('role') -> where('uid',$uid) -> find();
-        $access_id = $userArr['role'];
+        $userArr = Db::name('think_auth_group_access') -> where('uid',$uid) -> find();
+        $access_id = $userArr['group_id'];
         $auth = new Auth();
         $request = Request::instance();
         $url = $request -> module().'/'.$request -> controller().'/'.$request -> action();
