@@ -8,7 +8,7 @@
 
 namespace app\User\Command;
 
-use think\auth\Auth;
+use Auth;
 use think\Controller;
 use think\Db;
 use think\facade\Request;
