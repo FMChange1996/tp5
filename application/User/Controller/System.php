@@ -56,7 +56,6 @@ class System extends Base
                 'title' => 'require',
                 'status' => 'require'
             ],$message);
-
             if (!$validate ->check($data)){
                 return json(['code' => 400 , 'message' => $validate -> getError()]);
             }else{
@@ -66,13 +65,11 @@ class System extends Base
                     'type' => 1,
                     'status' => $data['status']
                 ]);
-
                 if ($rule -> save()){
                     return json(['code' => 200 , 'message' => '添加权限成功']);
                 }else{
                     return json(['code' => 400 , 'message' => '添加权限失败']);
                 }
-
             }
         }else{
             return view('system/rule_add',['title' => '添加权限']);
