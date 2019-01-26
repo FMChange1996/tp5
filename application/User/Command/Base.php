@@ -8,7 +8,7 @@
 
 namespace app\User\Command;
 
-use Auth;
+use hunankuai\Auth;
 use think\Controller;
 use think\Db;
 use think\facade\Request;
@@ -21,14 +21,15 @@ class Base extends Controller
         if ($uid == 1){
             return true;
         }
-        $userArr = Db::name('think_auth_group_access') -> where('uid',$uid) -> find();
+        $userArr = Db::name('kuai_auth_group_access') -> where('uid',$uid) -> find();
         $access_id = $userArr['group_id'];
         $auth = new Auth();
         $request = Request::instance();
         $url = $request -> module().'/'.$request -> controller().'/'.$request -> action();
-        if (!$auth -> check($url,$access_id)){
-            $this -> error('无权访问！');
-        }
+        dump($auth -> check('Admin/Article/Delete','1'));
+//        if (!$auth -> check('Admin/Article/Delete','1')){
+//            $this -> error('无权访问！');
+//        }
     }
 
 }

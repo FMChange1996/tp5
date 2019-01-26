@@ -4,25 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3374c528fb4105b6d3f53e5e315910c",
+    "content-hash": "b92e534b0e93865e47d2248b26d1d0bd",
     "packages": [
         {
-            "name": "topthink/framework",
-            "version": "v5.1.33",
+            "name": "hunankuai/auth",
+            "version": "v1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/top-think/framework.git",
-                "reference": "477e1cef91290a36398ecbcdffcec7268d80f0dd"
+                "url": "https://github.com/hunankuai/auth.git",
+                "reference": "2de8fb7d2a740869b8b5d81efb03059effff96ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/framework/zipball/477e1cef91290a36398ecbcdffcec7268d80f0dd",
-                "reference": "477e1cef91290a36398ecbcdffcec7268d80f0dd",
+                "url": "https://api.github.com/repos/hunankuai/auth/zipball/2de8fb7d2a740869b8b5d81efb03059effff96ae",
+                "reference": "2de8fb7d2a740869b8b5d81efb03059effff96ae",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "hunankuai\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "hunankuai",
+                    "email": "hunankuai@aliyun.com"
+                }
+            ],
+            "description": "hunankuai auth",
+            "time": "2018-06-23T01:25:48+00:00"
+        },
+        {
+            "name": "topthink/framework",
+            "version": "v5.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/top-think/framework.git",
+                "reference": "57026de4c60ee300896124f32554de8ebb3cc921"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/top-think/framework/zipball/57026de4c60ee300896124f32554de8ebb3cc921",
+                "reference": "57026de4c60ee300896124f32554de8ebb3cc921",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.0",
-                "topthink/think-installer": "2.*"
+                "topthink/think-installer": "~1.0"
             },
             "require-dev": {
                 "johnkary/phpunit-speedtrap": "^1.0",
@@ -55,20 +88,20 @@
                 "orm",
                 "thinkphp"
             ],
-            "time": "2019-01-16T06:10:52+00:00"
+            "time": "2018-01-19T08:06:41+00:00"
         },
         {
             "name": "topthink/think-installer",
-            "version": "v2.0.0",
+            "version": "v1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-installer.git",
-                "reference": "f5400a12c60e513911aef41fe443fa6920952675"
+                "reference": "1be326e68f63de4e95977ed50f46ae75f017556d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/think-installer/zipball/f5400a12c60e513911aef41fe443fa6920952675",
-                "reference": "f5400a12c60e513911aef41fe443fa6920952675",
+                "url": "https://api.github.com/repos/top-think/think-installer/zipball/1be326e68f63de4e95977ed50f46ae75f017556d",
+                "reference": "1be326e68f63de4e95977ed50f46ae75f017556d",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +129,7 @@
                     "email": "448901948@qq.com"
                 }
             ],
-            "time": "2018-05-11T06:45:42+00:00"
+            "time": "2017-05-27T06:58:09+00:00"
         },
         {
             "name": "topthink/think-migration",
