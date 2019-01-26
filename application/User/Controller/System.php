@@ -87,24 +87,26 @@ class System extends Base
                 $data = [
                     'roleName' => $data['roleName'],
                     'text' => $data['text'],
+                    'status' => $data['status'],
                     'role' => $data['role']
                 ];
                 $message = [
                     'roleName.require' => '角色名不能为空',
-                    'role.require' => '角色权限必须选择'
+                    'role.require' => '角色权限必须选择',
+                    'status.require' => '状态必须选择'
                 ];
                 $validate = Validate::make([
                     'roleName' => 'require',
-                    'role' => 'require'
+                    'role' => 'require',
+                    'status' => 'require'
                 ], $message);
-
                 if (!$validate->check($data)) {
                     return json(['code' => 400, 'message' => $validate->getError()]);
                 } else {
                     $role = new Role([
                         'title' => $data['roleName'],
-                        'status' => 1,
-                        'rules' => $data['role']
+                        'status' => $data['status'],
+                        'rules' => implode(',',$data['role'])
                     ]);
                     if ($role->save()){
                         return json(['code' => 200, 'message' => '角色添加成功']);
