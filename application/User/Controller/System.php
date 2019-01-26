@@ -9,6 +9,7 @@
 namespace app\User\Controller;
 
 use app\User\Command\Base;
+use app\User\Model\Role;
 use app\User\Model\Rule;
 use think\facade\Request;
 use think\Validate;
@@ -74,6 +75,17 @@ class System extends Base
         }else{
             return view('system/rule_add',['title' => '添加权限']);
         }
+    }
+
+    //角色添加操作
+    public function AddRole(){
+        if (Request::isPost()){
+
+        }else{
+            $list = Rule::select();
+            return view('system/role_add',['title' => '添加角色','list' => $list]);
+        }
+
     }
 
 }
