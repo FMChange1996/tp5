@@ -22,13 +22,8 @@ class System extends Base
     }
 
     public function UserRule(){
-        if (Request::isPost()){
-
-        }else{
-            $list = Rule::select();
-            return view('system/user_rule',['title' => '管理员权限' , 'list' => $list , 'count' => $list -> count()]);
-        }
-
+        $list = Rule::select();
+        return view('system/user_rule',['title' => '管理员权限' , 'list' => $list , 'count' => $list -> count()]);
     }
 
     public function UserInfo(){
