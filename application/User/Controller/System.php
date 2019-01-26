@@ -101,7 +101,16 @@ class System extends Base
                 if (!$validate->check($data)) {
                     return json(['code' => 400, 'message' => $validate->getError()]);
                 } else {
-
+                    $role = new Role([
+                        'title' => $data['roleName'],
+                        'status' => 1,
+                        'rules' => $data['role']
+                    ]);
+                    if ($role->save()){
+                        return json(['code' => 200, 'message' => '角色添加成功']);
+                    }else{
+                        return json(['code' => 400, 'message' => '角色添加失败']);
+                    }
                 }
             }
         }else{
