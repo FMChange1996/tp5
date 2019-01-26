@@ -42,38 +42,34 @@ class System extends Base
     //权限添加操作
     public function AddRule(){
         if (Request::isPost()){
-            if (!Request::param('role')){
-                return json(['code' => 400 , 'message' => '权限必须选择']);
+            $data = [
+              'name' => Request::param('name'),
+              'title' => Request::param('title'),
+              'status' => Request::param('status')
+            ];
+            $message =[
+                'name.require' => '权限路径不能为空',
+                'title.require' => '权限名称不能为空',
+                'status.require' => '权限状态不能为空'
+            ];
+            $validate = Validate::make([
+                'name' => 'require',
+                'title' => 'require',
+                'status' => 'require'
+            ],$message);
+            if (!$validate ->check($data)){
+                return json(['code' => 400 , 'message' => $validate -> getError()]);
             }else{
-                $data = [
-                  'name' => Request::param('name'),
-                  'title' => Request::param('title'),
-                  'status' => Request::param('status')
-                ];
-                $message =[
-                    'name.require' => '权限路径不能为空',
-                    'title.require' => '权限名称不能为空',
-                    'status.require' => '权限状态不能为空'
-                ];
-                $validate = Validate::make([
-                    'name' => 'require',
-                    'title' => 'require',
-                    'status' => 'require'
-                ],$message);
-                if (!$validate ->check($data)){
-                    return json(['code' => 400 , 'message' => $validate -> getError()]);
+                $rule = new Rule([
+                    'name' => $data['name'],
+                    'title' => $data['title'],
+                    'type' => 1,
+                    'status' => $data['status']
+                ]);
+                if ($rule -> save()){
+                    return json(['code' => 200 , 'message' => '添加权限成功']);
                 }else{
-                    $rule = new Rule([
-                        'name' => $data['name'],
-                        'title' => $data['title'],
-                        'type' => 1,
-                        'status' => $data['status']
-                    ]);
-                    if ($rule -> save()){
-                        return json(['code' => 200 , 'message' => '添加权限成功']);
-                    }else{
-                        return json(['code' => 400 , 'message' => '添加权限失败']);
-                    }
+                    return json(['code' => 400 , 'message' => '添加权限失败']);
                 }
             }
         }else{
@@ -84,27 +80,30 @@ class System extends Base
     //角色添加操作
     public function AddRole(){
         if (Request::isPost()){
-            $data = Request::param();
-            $data = [
-                'roleName' => $data['roleName'],
-                'text' => $data['text'],
-                'role' => $data['role']
-            ];
-            $message = [
-                'roleName.require' => '角色名不能为空',
-                'role.require' => '角色权限必须选择'
-            ];
-            $validate = Validate::make([
-                'roleName' => 'require',
-                'role' => 'require'
-            ],$message);
+            if (!Request::param('role')){
+                return json(['code' => 400 , 'message' => '权限必须选择']);
+            }else {
+                $data = Request::param();
+                $data = [
+                    'roleName' => $data['roleName'],
+                    'text' => $data['text'],
+                    'role' => $data['role']
+                ];
+                $message = [
+                    'roleName.require' => '角色名不能为空',
+                    'role.require' => '角色权限必须选择'
+                ];
+                $validate = Validate::make([
+                    'roleName' => 'require',
+                    'role' => 'require'
+                ], $message);
 
-            if (!$validate ->check($data)){
-                return json(['code' => 400 ,'message' => $validate -> getError()]);
-            }else{
-
+                if (!$validate->check($data)) {
+                    return json(['code' => 400, 'message' => $validate->getError()]);
+                } else {
+                    
+                }
             }
-
         }else{
             $list = Rule::select();
             return view('system/role_add',['title' => '添加角色','list' => $list , 'count' => $list -> count()]);

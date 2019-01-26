@@ -57,9 +57,6 @@
 
 {block name="script"}
 <script type="text/javascript">
-
-
-
     $('#submit').on('click',function () {
         var check_val = [];
         $("input[name='role[]']:checked").each(function(i){
@@ -67,7 +64,7 @@
         });
         console.log(check_val);
         $.ajax({
-            url:'{:url('user/system/addrole')}',
+            url:'{:url('/user/system/addrole')}',
             type:'post',
             data:$('#role_add').serialize(),
             dataType:'json',
