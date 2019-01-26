@@ -14,7 +14,7 @@
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-3">备注：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="" name="text">
+                <input type="text" class="input-text" value="" placeholder="" id="text" name="text">
             </div>
         </div>
         <div class="row clearfix">
@@ -35,7 +35,7 @@
                             <dd>
                                 {volist name="list" id="vo" mod="4"}
                                 <label class="">
-                                    <input type="checkbox" value="{$vo.id}" name="role[]" id="user-Character">
+                                    <input type="checkbox" value="{$vo.id}" name="role" id="user-Character">
                                     {$vo.title}</label>
                                 {eq name="mod" value="3"}<br/>{/eq}
                                 {/volist}
@@ -47,7 +47,7 @@
         </div>
         <div class="row clearfix">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-                <button type="submit" class="btn btn-success radius" id="admin-role-save"><i class="icon-ok"></i> 确定</button>
+                <button type="button" class="btn btn-success radius" id="submit"><i class="icon-ok"></i> 确定</button>
             </div>
         </div>
     </form>
@@ -59,14 +59,17 @@
 <script type="text/javascript">
     $('#submit').on('click',function () {
         var check_val = [];
-        $("input[name='role[]']:checked").each(function(i){
+        $("input[name='role']:checked").each(function(i){
             check_val[i] =$(this).val();
         });
-        console.log(check_val);
         $.ajax({
             url:'{:url('/user/system/addrole')}',
             type:'post',
-            data:$('#role_add').serialize(),
+            data:{
+                'roleName':$('#roleName').val(),
+                'text':$('#text').val(),
+                'role':check_val
+            },
             dataType:'json',
             success:function (response) {
                 if (response.code == 200){

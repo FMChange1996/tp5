@@ -81,7 +81,7 @@ class System extends Base
     public function AddRole(){
         if (Request::isPost()){
             if (!Request::param('role')){
-                return json(['code' => 400 , 'message' => '权限必须选择']);
+                return json(['code' => 400, 'message' => '权限必须选择']);
             }else {
                 $data = Request::param();
                 $data = [
@@ -99,7 +99,7 @@ class System extends Base
                 ], $message);
 
                 if (!$validate->check($data)) {
-                    return json(['code' => 400 , 'message' => $validate -> getError()]);
+                    return json(['code' => 400, 'message' => $validate->getError()]);
                 } else {
 
                 }
