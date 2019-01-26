@@ -36,7 +36,8 @@ class System extends Base
     }
 
     public function UserRole(){
-        return view('system/user_role',['title' => '角色管理']);
+        $list = Role::select();
+        return view('system/user_role',['title' => '角色管理','list' => $list ,'count' => $list -> count()]);
     }
 
     //权限添加操作
