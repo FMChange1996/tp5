@@ -63,7 +63,7 @@
 <script type="text/javascript">
     $('#submit').on('click',function () {
         $.ajax({
-            url:'{:url('/user/orders/orderadd')}',
+            url:'{:url('/user/orders/add')}',
             type:'post',
             data:$('#order_add').serialize(),
             dataType:'json',

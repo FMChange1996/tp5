@@ -4,41 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b92e534b0e93865e47d2248b26d1d0bd",
+    "content-hash": "1e15629a9990564579b71c206afc7eed",
     "packages": [
-        {
-            "name": "hunankuai/auth",
-            "version": "v1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hunankuai/auth.git",
-                "reference": "2de8fb7d2a740869b8b5d81efb03059effff96ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hunankuai/auth/zipball/2de8fb7d2a740869b8b5d81efb03059effff96ae",
-                "reference": "2de8fb7d2a740869b8b5d81efb03059effff96ae",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "hunankuai\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "hunankuai",
-                    "email": "hunankuai@aliyun.com"
-                }
-            ],
-            "description": "hunankuai auth",
-            "time": "2018-06-23T01:25:48+00:00"
-        },
         {
             "name": "topthink/framework",
             "version": "v5.1.4",

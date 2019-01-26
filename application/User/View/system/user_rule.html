@@ -7,9 +7,9 @@
         <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
             首页
             <span class="c-gray en">/</span>
-            管理员管理
+            系统管理
             <span class="c-gray en">/</span>
-            管理员列表
+            权限管理
         </nav>
         <article class="Hui-admin-content clearfix">
             <div class="panel">
@@ -17,34 +17,42 @@
                     <div class="clearfix">
 						<span class="f-l">
 							<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-							<a class="btn btn-primary radius" href="javascript:;" onclick="layer_show('添加角色','admin-role-add.html','800')"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a>
+							<a class="btn btn-primary radius" href="javascript:;" onclick="layer_show('添加角色','{:url('User/System/AddRule')}','800')"><i class="Hui-iconfont">&#xe600;</i> 添加权限</a>
 						</span>
-                        <span class="f-r">共有数据：<strong>54</strong> 条</span>
+                        <span class="f-r">共有数据：<strong>{$count}</strong> 条</span>
                     </div>
                     <div class="mt-20 clearfix">
                         <table class="table table-border table-bordered table-hover table-bg">
                             <thead>
                             <tr>
-                                <th scope="col" colspan="6">角色管理</th>
+                                <th scope="col" colspan="6">权限管理</th>
                             </tr>
                             <tr class="text-c">
                                 <th width="25"><input type="checkbox" value="" name=""></th>
                                 <th width="40">ID</th>
-                                <th width="200">角色名</th>
-                                <th>用户列表</th>
-                                <th width="300">描述</th>
+                                <th width="200">权限描述</th>
+                                <th>权限路径</th>
+                                <th width="80">状态</th>
                                 <th width="70">操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             {volist name="list" id="rule"}
                             <tr class="text-c">
-                                <td><input type="checkbox" value="" name=""></td>
+                                <td><input type="checkbox" value="{$rule.id}" name=""></td>
                                 <td>{$rule.id}</td>
                                 <td>{$rule.title}</td>
                                 <td>{$rule.name}</td>
-                                <td>拥有至高无上的权利</td>
-                                <td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                                {if ($rule.status == "正常")}
+                                <td class="td-status"><span class="label label-success radius">{$rule.status}</span></td>
+                                {else /}
+                                <td class="td-status"><span class="label label-danger radius">{$rule.status}</span></td>
+                                {/if}
+
+                                <td class="f-14">
+                                    <a title="编辑" href="javascript:;" onclick="layer_show('角色编辑','admin-role-add.html','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                                    <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                </td>
                             </tr>
                             {/volist}
                             </tbody>

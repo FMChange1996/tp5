@@ -33,7 +33,7 @@ class Orders extends Base
     }
 
     //添加订单操作
-    public function OrderAdd(){
+    public function Add(){
         if (Request::isPost()){
             $data = [
                 'name' => Request::param('name'),
