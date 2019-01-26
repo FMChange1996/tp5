@@ -14,7 +14,7 @@
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-3">备注：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="" name="">
+                <input type="text" class="input-text" value="" placeholder="" id="" name="text">
             </div>
         </div>
         <div class="row clearfix">
@@ -26,7 +26,7 @@
                             权限设置</label>
                     </dt>
                     <dd>
-                        <dl class="clearfix Hui-admin-permission-list2" name="role">
+                        <dl class="clearfix Hui-admin-permission-list2">
                             <dt>
                                 <label class="">
                                     <input type="checkbox" value="0"  id="user-Character-0-0">
@@ -35,7 +35,7 @@
                             <dd>
                                 {volist name="list" id="vo" mod="4"}
                                 <label class="">
-                                    <input type="checkbox" value="{$vo.id}"  id="user-Character-0-0-{$vo.id-1}">
+                                    <input type="checkbox" value="{$vo.id}" name="role[]" id="user-Character">
                                     {$vo.title}</label>
                                 {eq name="mod" value="3"}<br/>{/eq}
                                 {/volist}
@@ -47,7 +47,7 @@
         </div>
         <div class="row clearfix">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-                <button type="submit" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+                <button type="submit" class="btn btn-success radius" id="admin-role-save"><i class="icon-ok"></i> 确定</button>
             </div>
         </div>
     </form>
@@ -57,23 +57,31 @@
 
 {block name="script"}
 <script type="text/javascript">
+
+
+
     $('#submit').on('click',function () {
+        var check_val = [];
+        $("input[name='role[]']:checked").each(function(i){
+            check_val[i] =$(this).val();
+        });
+        console.log(check_val);
         $.ajax({
-            url:'{:url('/user/system/addrole')}',
+            url:'{:url('user/system/addrole')}',
             type:'post',
             data:$('#role_add').serialize(),
             dataType:'json',
             success:function (response) {
-            //     if (response.code == 200){
-            //         layer.msg(response.message,{icon:6,time:700,end:function () {
-            //                 var index = parent.layer.getFrameIndex(window.name);
-            //                 parent.layer.close(index);
-            //                 window.parent.location.replace("{:url('/User/System/UserRole')}");
-            //             }})
-            //     } else{
-            //         layer.msg(response.message,{icon:5,time:700});
-            //     }
-            // }
+                if (response.code == 200){
+                    layer.msg(response.message,{icon:6,time:700,end:function () {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                            window.parent.location.replace("{:url('/User/System/UserRole')}");
+                        }})
+                } else{
+                    layer.msg(response.message,{icon:5,time:700});
+                }
+            }
         })
     })
 
@@ -107,21 +115,6 @@
             }
         });
 
-        $("#form-admin-role-add").validate({
-            rules:{
-                roleName:{
-                    required:true,
-                },
-            },
-            onkeyup:false,
-            focusCleanup:true,
-            success:"valid",
-            submitHandler:function(form){
-                $(form).ajaxSubmit();
-                var index = parent.layer.getFrameIndex(window.name);
-                parent.layer.close(index);
-            }
-        });
     });
 
 
