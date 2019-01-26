@@ -1,20 +1,19 @@
 <?php
 // +----------------------------------------------------------------------
-// | ThinkPHP 5 [ WE CAN DO IT JUST THINK IT ]
+// | ThinkPHP 5.1 auth
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.zzstudio.net All rights reserved.
+// | Copyright (c) 2018 http://www.wyxgn.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 ;)
 // +----------------------------------------------------------------------
-// | Author: Byron Sampson <xiaobo.sun@gzzstudio.net>
+// | Author: lqsong <957698457@qq.com>
 // +----------------------------------------------------------------------
 
 use think\Db;
 use think\facade\Config;
-use think\Session;
-use think\Request;
+use think\facade\Session;
+use think\facade\Request;
 use think\Loader;
-
 /**
  * 权限认证类
  * 功能特性：
@@ -70,29 +69,21 @@ DROP TABLE IF EXISTS `think_auth_group_access`;
     KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
  */
-
 class Auth
 {
     /**
-     * @var object 对象实例
+     * var object 对象实例
      */
     protected static $instance;
-    /**
-     * 当前请求实例
-     * @var Request
-     */
-    protected $request;
-
     //默认配置
     protected $config = [
         'auth_on' => 1, // 权限开关
         'auth_type' => 1, // 认证方式，1为实时认证；2为登录认证。
-        'auth_group' => 'auth_group', // 用户组数据表名
-        'auth_group_access' => 'auth_group_access', // 用户-用户组关系表
+        'auth_group' => 'group', // 用户组数据表名
+        'auth_group_access' => 'group_access', // 用户-用户组关系表
         'auth_rule' => 'auth_rule', // 权限规则表
         'auth_user' => 'member', // 用户信息表
     ];
-
     /**
      * 类架构函数
      * Auth constructor.
@@ -103,15 +94,12 @@ class Auth
         if ($auth = Config::get('auth')) {
             $this->config = array_merge($this->config, $auth);
         }
-        // 初始化request
-        $this->request = new Request();
     }
-
     /**
      * 初始化
-     * @access public
+     * access public
      * @param array $options 参数
-     * @return \think\Request
+     * return \think\Request
      */
     public static function instance($options = [])
     {
@@ -120,7 +108,6 @@ class Auth
         }
         return self::$instance;
     }
-
     /**
      * 检查权限
      * @param $name string|array  需要验证的规则列表,支持逗号分隔的权限规则或索引数组
@@ -128,7 +115,7 @@ class Auth
      * @param int $type 认证类型
      * @param string $mode 执行check的模式
      * @param string $relation 如果为 'or' 表示满足任一条规则即通过验证;如果为 'and'则表示需满足所有规则才能通过验证
-     * @return bool               通过验证返回true;失败返回false
+     * return bool               通过验证返回true;失败返回false
      */
     public function check($name, $uid, $type = 1, $mode = 'url', $relation = 'or')
     {
@@ -147,7 +134,7 @@ class Auth
         }
         $list = []; //保存验证通过的规则名
         if ('url' == $mode) {
-            $REQUEST = unserialize(strtolower(serialize($this->request->param())));
+            $REQUEST = unserialize(strtolower(serialize(Request::param())));
         }
         foreach ($authList as $auth) {
             $query = preg_replace('/^.+\?/U', '', $auth);
@@ -172,14 +159,12 @@ class Auth
         if ('and' == $relation && empty($diff)) {
             return true;
         }
-
         return false;
     }
-
     /**
      * 根据用户id获取用户组,返回值为数组
      * @param  $uid int     用户id
-     * @return array       用户所属的用户组 array(
+     * return array       用户所属的用户组 array(
      *     array('uid'=>'用户id','group_id'=>'用户组id','title'=>'用户组名称','rules'=>'用户组拥有的规则id,多个,号隔开'),
      *     ...)
      */
@@ -198,15 +183,13 @@ class Auth
             ->where("{$auth_group_access}.uid='{$uid}' and {$auth_group}.status='1'")
             ->select();
         $groups[$uid] = $user_groups ?: [];
-
         return $groups[$uid];
     }
-
     /**
      * 获得权限列表
      * @param integer $uid 用户id
      * @param integer $type
-     * @return array
+     * return array
      */
     protected function getAuthList($uid, $type)
     {
@@ -229,11 +212,11 @@ class Auth
             $_authList[$uid . $t] = [];
             return [];
         }
-        $map = array(
-            'id' => ['in', $ids],
+        $map = [
             'type' => $type,
+            ['id','in', $ids],
             'status' => 1,
-        );
+        ];
         //读取用户组所有权限规则
         $rules = Db::name($this->config['auth_rule'])->where($map)->field('condition,name')->select();
         //循环规则，判断结果。
@@ -258,24 +241,20 @@ class Auth
             //规则列表结果保存到session
             Session::set('_auth_list_' . $uid . $t, $authList);
         }
-
         return array_unique($authList);
     }
-
     /**
      * 获得用户资料,根据自己的情况读取数据库
      */
     protected function getUserInfo($uid)
     {
         static $userinfo = [];
-
         $user = Db::name($this->config['auth_user']);
         // 获取用户表主键
         $_pk = is_string($user->getPk()) ? $user->getPk() : 'uid';
         if (!isset($userinfo[$uid])) {
             $userinfo[$uid] = $user->where($_pk, $uid)->find();
         }
-
         return $userinfo[$uid];
     }
 }
