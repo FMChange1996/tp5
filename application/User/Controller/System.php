@@ -80,10 +80,11 @@ class System extends Base
     //角色添加操作
     public function AddRole(){
         if (Request::isPost()){
-
+            $data = Request::param();
+            dump($data);
         }else{
             $list = Rule::select();
-            return view('system/role_add',['title' => '添加角色','list' => $list]);
+            return view('system/role_add',['title' => '添加角色','list' => $list , 'count' => $list -> count()]);
         }
 
     }
