@@ -43,6 +43,7 @@ class System extends Base
         return view('system/user_role',['title' => '角色管理']);
     }
 
+    //权限添加操作
     public function AddRule(){
         if (Request::isPost()){
             $data = [
