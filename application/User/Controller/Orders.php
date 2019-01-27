@@ -63,12 +63,14 @@ class Orders extends Base
                 return json(['code' => 400 , 'message' => $validate -> getError()]);
             }else{
                 $order = new OrdersModel([
+                    'order_id' => date('YmdHis').range(10000,99999),
                     'name' => $data['name'],
                     'mobile' => $data['mobile'],
                     'address' => $data['address'],
                     'goods' => $data['goods'],
                     'urgent' => $data['urgent'],
                     'status' => '0',
+                    'create' => session('name'),
                     'create_time' => time()
                 ]);
                 if ($order -> save()){
