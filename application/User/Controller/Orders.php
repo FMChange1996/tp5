@@ -70,7 +70,7 @@ class Orders extends Base
                     'goods' => $data['goods'],
                     'urgent' => $data['urgent'],
                     'status' => '0',
-                    'create' => session('name'),
+                    'create' => session('username'),
                     'create_time' => time()
                 ]);
                 if ($order -> save()){
