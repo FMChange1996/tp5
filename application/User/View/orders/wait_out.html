@@ -101,11 +101,19 @@
                         {/volist}
                         </tbody>
                     </table>
-                    {$list|raw}
                 </div>
                 <div id="laypage" class="text-c"></div>
             </div>
         </div>
     </article>
 </div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+    laypage({
+        elem:'laypage',
+        count:'{$counts}'
+    })
+</script>
 {/block}

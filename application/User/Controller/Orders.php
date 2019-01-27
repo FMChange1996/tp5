@@ -24,7 +24,7 @@ class Orders extends Base
     //未发货订单列表
     public function WaitOut(){
         $list = OrdersModel::paginate(10);
-        return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
+        return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count() , 'counts' => $list -> total()]);
     }
 
     //已发货订单列表
