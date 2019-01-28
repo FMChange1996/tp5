@@ -29,7 +29,8 @@ class Orders extends Base
 
     //已发货订单列表
     public function Shipped(){
-        return view('orders/shipped',['title' => '已发货']);
+        $list = OrdersModel::where('status',1) -> paginate(10);
+        return view('orders/shipped',['title' => '已发货','list' => $list]);
     }
 
     //添加订单操作
@@ -82,5 +83,27 @@ class Orders extends Base
         }else{
             return view('orders/orders_add',['title' => '添加订单']);
         }
+    }
+
+    //删除订单操作
+    public function Del(){
+        if (Request::isPost()){
+            $id = Request::param('id');
+            if (empty($id)){
+                return json(['code' => 400 ,'message' => '删除订单号不能为空！']);
+            }else{
+                if (OrdersModel::destroy($id)){
+                    return json(['code' => 200 ,'message' => '删除成功']);
+                }else{
+                    return json(['code' => 400 ,'message' => '删除失败']);
+                }
+            }
+        }else{
+            $this -> error('不支持Get请求');
+        }
+    }
+
+    public function Edit(){
+        return view('orders/edit',['title' => '订单编辑']);
     }
 }

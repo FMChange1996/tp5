@@ -9,9 +9,14 @@
 namespace app\User\Model;
 
 use think\Model;
+use think\model\concern\SoftDelete;
 
 class Orders extends Model
 {
+    use SoftDelete;
+
+    protected $autoWriteTimestamp = true;
+
     public function getUrgentAttr($value){
         $urgent = [
             '0' => '正常',
