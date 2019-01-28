@@ -30,7 +30,7 @@ class Orders extends Base
     //已发货订单列表
     public function Shipped(){
         $list = OrdersModel::where('status',1) -> paginate(10);
-        return view('orders/shipped',['title' => '已发货','list' => $list]);
+        return view('orders/shipped',['title' => '已发货','list' => $list ,'count' => $list -> count()]);
     }
 
     //添加订单操作
