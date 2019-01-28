@@ -11,28 +11,35 @@
                 <textarea class="textarea" id="auto_address" name="audo_address"></textarea>
             </div>
         </div>
+        <input type="hidden"  value="{$vo.id}" disabled="disabled">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>订单编号：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$vo.order_id}"  id="order_id" name="order_id">
+            </div>
+        </div>
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>收件人姓名：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="名字" id="name" name="name">
+                <input type="text" class="input-text" value="{$vo.name}"  id="name" name="name">
             </div>
         </div>
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>收件人手机号：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" id="mobile" name="mobile" placeholder="手机号">
+                <input type="text" class="input-text" id="mobile" name="mobile" value="{$vo.mobile}">
             </div>
         </div>
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>收件人地址：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" id="address" name="address" placeholder="收件地址">
+                <input type="text" class="input-text" id="address" name="address" value="{$vo.address}">
             </div>
         </div>
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>清单：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <textarea class="textarea" name="goods" id="goods"></textarea>
+                <textarea class="textarea" name="goods" id="goods">{$vo.goods}</textarea>
             </div>
         </div>
         <div class="row clearfix">
@@ -61,8 +68,8 @@
 <script type="text/javascript">
     $('#submit').on('click',function () {
         $.ajax({
-            url:'{:url('/user/orders/add')}',
-            type:'post',
+            url:'{:url('/user/orders/edit')}',
+            type:'put',
             data:$('#order_add').serialize(),
             dataType:'json',
             success:function (response) {

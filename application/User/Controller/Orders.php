@@ -103,7 +103,74 @@ class Orders extends Base
         }
     }
 
+    //订单修改操作
     public function Edit(){
-        return view('orders/edit',['title' => '订单编辑']);
+        if (Request::isGet()){
+            $id = Request::param('id');
+            $list = OrdersModel::where('id',$id) -> find();
+            return view('orders/edit',['title' => '订单编辑','vo' => $list]);
+        }elseif (Request::isPut()){
+            $data = [
+                'id' => Request::param('id'),
+                'name' => Request::param('name'),
+                'mobile' => Request::param('mobile'),
+                'address' => Request::param('address'),
+                'goods' => Request::param('goods'),
+                'urgent' => Request::param('urgent')
+            ];
+
+            $message =[
+                'name.require' => '收件人名字不能为空',
+                'mobile.require' => '收件人电话不能为空',
+                'mobile.mix' => '电话格式不正确',
+                'mobile.min' => '电话格式不正确',
+                'address.require' => '收件地址不能为空',
+                'goods' => '发货清单不能为空',
+                'urgent' => '紧急状态必须选择'
+            ];
+
+            $validate = Validate::make([
+                'name' => 'require',
+                'mobile' => 'require|min:11|max:12',
+                'address' => 'require',
+                'goods' => 'require',
+                'urgent' => 'require|integer'
+            ],$message);
+
+            if (!$validate -> check($data)){
+                return json(['code' => 400 , 'message' => $validate -> getError()]);
+            }else{
+                $find = OrdersModel::where('id',$data['id']) -> data($data);
+                if ($find -> update()){
+                    return json(['code' => 200 , 'message' => '更新成功']);
+                }else{
+                    return json(['code' => 400 , 'message' => '更新失败']);
+                }
+            }
+        }
+
+    }
+
+    public function Send(){
+        if (Request::isPost()){
+            $id = Request::param('id');
+            $exp_num = Request::param('exp_num');
+            if (empty($exp_num)){
+                return json(['code' => 400 ,'message' => '物流单号不能为空']);
+            }else{
+                $find = OrdersModel::where('id',$id) -> data(['exp_number' => $exp_num]);
+                if ($find -> update()){
+                    return json(['code' => 200 , 'message' => '发货成功']);
+                }else{
+                    return json(['code' => 400 , 'message' => '发货失败']);
+                }
+            }
+        }elseif (Request::isGet()){
+            $id = Request::param('id');
+            $vo = OrdersModel::where('id',$id) -> find();
+            return view('orders/send',['title' => '订单发货', 'vo' => $vo]);
+        }else{
+            return $this -> error('操作失败！');
+        }
     }
 }
