@@ -13,47 +13,11 @@
         待发货列表
     </nav>
     <article class="Hui-admin-content clearfix">
-        <div class="panel">
-            <div class="panel-body">
-                <div class="row clearfix">
-                    <form>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="row clearfix mb-10">
-                            <span class="col-xs-4 form-item-label">紧急状态：</span>
-                            <span class="col-xs-8 form-item-control">
-                                <span class="select-box">
-                                    <select id="classifyID" name="urgent" class="select">
-                                        <option></option>
-                                        <option value="0">正常</option>
-                                        <option value="1">加急</option>
-                                    </select>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="row clearfix mb-10">
-                            <span class="col-xs-4 form-item-label">客户名称：</span>
-                            <span class="col-xs-8 form-item-control">
-										<input type="text" name="searchName" id="search-input" placeholder=" 客户名称" class="input-text" />
-									</span>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="row clearfix">
-									<span class="col-xs-4 form-item-control">
-										<button name="" id="search-submit" class="btn btn-success radius" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-									</span>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         <div class="panel mt-20">
             <div class="panel-body">
                 <div class="clearfix">
 							<span class="f-l">
+                            <a href="javasxript:;" onclick="#" class="btn btn-default radius"><i class="Hui-iconfont">&#xe640;</i>批量下载</a>
 							<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 							<a class="btn btn-primary radius" onclick="layer_show('添加订单','{:url('/User/Orders/Add')}')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加订单</a>
 							</span>
@@ -63,7 +27,7 @@
                     <table id="data-table-list" class="table table-border table-bordered table-bg table-hover table-sort">
                         <thead>
                         <tr class="text-c">
-                            <th width="25"><input type="checkbox" name="" value=""></th>
+                            <th width="25"><input type="checkbox" name="" value="" id="check_all"></th>
                             <th width="80">订单号</th>
                             <th width="260">收件信息</th>
                             <th>清单</th>
@@ -102,7 +66,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="laypage" class="text-c"></div>
+                <div id="laypage" class="text-c">{$list|raw}</div>
             </div>
         </div>
     </article>
@@ -136,6 +100,10 @@
                 });
             }
         });
+    }
+    
+    function download_file() {
+        
     }
 
 </script>

@@ -24,17 +24,8 @@ class Orders extends Base
     //未发货订单列表
     public function WaitOut(){
         if (Request::isGet()){
-            if (!empty(Request::param('searchName')) && empty(Request::param('urgent'))){
-                $list = OrdersModel::where('name',Request::param('searchName')) -> paginate(10);
-                return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
-            }elseif (!empty(Request::param('urgent')) && empty(Request::param('searchName'))){
-                $list = OrdersModel::where('urgent',Request::param('urgent'));
-                return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
-            }else{
-                $list = OrdersModel::where('status',0) -> paginate(10);
-                return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count() , 'counts' => $list -> total()]);
-
-            }
+            $list = OrdersModel::where('status',0) -> paginate(10);
+            return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
         }else{
             return $this -> error('访问错误');
         }
