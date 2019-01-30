@@ -23,14 +23,36 @@ class Orders extends Base
 
     //未发货订单列表
     public function WaitOut(){
-        $list = OrdersModel::paginate(10);
-        return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count() , 'counts' => $list -> total()]);
+        if (Request::isGet()){
+            if (!empty(Request::param('searchName')) && empty(Request::param('urgent'))){
+                $list = OrdersModel::where('name',Request::param('searchName')) -> paginate(10);
+                return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count() , 'counts' => $list -> total()]);
+            }elseif (!empty(Request::param('urgent'))){
+                
+            }else{
+                $list = OrdersModel::where('status',0) -> paginate(10);
+                return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count() , 'counts' => $list -> total()]);
+
+            }
+        }else{
+            return $this -> error('访问错误');
+        }
     }
 
     //已发货订单列表
     public function Shipped(){
-        $list = OrdersModel::where('status',1) -> paginate(10);
-        return view('orders/shipped',['title' => '已发货','list' => $list ,'count' => $list -> count()]);
+        if (Request::isGet()){
+            if (!empty(Request::param('searchName'))){
+                $list =OrdersModel::where('name',Request::param('searchName')) -> paginate(10);
+                return view('orders/shipped',['title' => '已发货','list' => $list ,'count' => $list -> count()]);
+            }else{
+                $list = OrdersModel::where('status',1) -> paginate(10);
+                return view('orders/shipped',['title' => '已发货','list' => $list ,'count' => $list -> count()]);
+            }
+        }else{
+            return $this -> error('访问错误');
+        }
+
     }
 
     //添加订单操作
@@ -173,5 +195,10 @@ class Orders extends Base
         }else{
             return $this -> error('操作失败！');
         }
+    }
+
+    //订单搜索功能
+    public function Seach(){
+
     }
 }
