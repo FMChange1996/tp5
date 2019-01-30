@@ -29,7 +29,7 @@ class Orders extends Base
                 return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
             }elseif (!empty(Request::param('urgent')) && empty(Request::param('searchName'))){
                 $list = OrdersModel::where('urgent',Request::param('urgent'));
-                return view('orders/wait_out',['title' => '待发货','list' => $list , 'count' => $list ->count()]);
+                return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
             }else{
                 $list = OrdersModel::where('status',0) -> paginate(10);
                 return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count() , 'counts' => $list -> total()]);
