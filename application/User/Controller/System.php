@@ -23,7 +23,7 @@ class System extends Base
     }
 
     public function UserRule(){
-        $list = Rule::select();
+        $list = Rule::paginate(10);
         return view('system/user_rule',['title' => '管理员权限' , 'list' => $list , 'count' => $list -> count()]);
     }
 
