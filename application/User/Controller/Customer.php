@@ -58,6 +58,7 @@ class Customer extends Base
         }
     }
 
+    //客户删除操作
     public function Del(){
         if (Request::isPost()){
             $id = Request::param('id');

@@ -17,7 +17,6 @@
             <div class="panel-body">
                 <div class="clearfix">
 							<span class="f-l">
-							<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 							<a class="btn btn-primary radius" onclick="layer_show('添加客户','{:url('/User/Customer/Add')}',500,300)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加客户</a>
 							</span>
                     <span class="f-r">共有数据：<strong>54</strong> 条</span>
@@ -45,19 +44,25 @@
                             <td>{$vo.id}</td>
                             <td><a href="https://amos.alicdn.com/getcid.aw?spm=a1z09.1.0.0.105e36064gAzgC&v=3&groupid=0&s=1&charset=utf-8&uid={$vo.wangwang}&site=cntaobao&fromid=cntaobao" target="_blank">{$vo.wangwang}</a></td>
                             {if($vo.first_time == null)}
-                            <td></td>
+                            <td><a href="javascript:;" onclick="first_time('{$vo.id}')" class="btn btn-success radius" >添加</a></td>
                             {else /}
                             <td>{$vo.first_time}</td>
                             {/if}
                             {if($vo.second_time == null)}
+                            <td><a href="javascript:;" onclick="second_time('{$vo.id}')" class="btn btn-success radius" >添加</a></td>
                             {else /}
                             <td>{$vo.second_time}</td>
                             {/if}
                             {if($vo.third_time == null)}
+                            <td><a href="javascript:;" onclick="third_time('{$vo.id}')" class="btn btn-success radius" >添加</a></td>
                             {else /}
                             <td>{$vo.third_time}</td>
                             {/if}
+                            {if($vo.remarks == null)}
+                            <td><a href="javascript:;" onclick="edit_remark('{$vo.id}')" class="btn btn-success radius" >添加</a></td>
+                            {else /}
                             <td>{$vo.remarks}</td>
+                            {/if}
                             <td>{$vo.create}</td>
                             <td>{$vo.create_time}</td>
                             <td class="f-14 td-manage">
@@ -73,10 +78,19 @@
         </div>
     </article>
 </div>
+<div ><input id="date" type="hidden"></div>
 {/block}
 
 {block name="script"}
 <script type="text/javascript">
+    function dete() {
+        $("#date").datetimepicker({
+            language:"zh-cn",
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    }
 
     //单个客户删除
     function member_del(id) {
@@ -103,6 +117,49 @@
                 });
             }
         });
+    }
+
+    //第一次跟踪时间添加
+    function first_time(id) {
+        layer.open({
+            type: 2 //此处以iframe举例
+            ,title: '添加时间'
+            ,area: ['390px', '330px']
+            ,shade: 0
+            ,offset: 'auto'
+            ,maxmin: true
+            ,content: ['','no']
+            ,scrollbar:false
+            ,btn: ['保存', '关闭'] //只是为了演示
+            ,yes: function(){
+                $(that).click(); //此处只是为了演示，实际使用可以剔除
+            }
+            ,btn2: function(){
+                layer.closeAll();
+            }
+
+            ,zIndex: layer.zIndex //重点1
+            ,success: function(layero){
+                layer.setTop(layero); //重点2
+            }
+        });
+
+
+    }
+
+    //第二次跟踪时间添加
+    function second_time(id) {
+
+    }
+
+    //第三次跟踪时间添加
+    function third_time(id) {
+
+    }
+
+    //客户备注
+    function edit_remark(id) {
+
     }
 
 </script>
