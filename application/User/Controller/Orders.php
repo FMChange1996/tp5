@@ -49,7 +49,7 @@ class Orders extends Base
 
     //添加订单操作
     public function Add(){
-        if (Request::isPost()){
+        if (Request::isPost()) {
             $data = [
                 'name' => Request::param('name'),
                 'mobile' => Request::param('mobile'),
@@ -68,34 +68,34 @@ class Orders extends Base
                 'urgent.integer' => '紧急状态未选择'
             ];
             $validate = Validate::make([
-                    'name' => 'require',
-                    'mobile' => 'require|min:11|max:12',
-                    'address' => 'require',
-                    'goods' => 'require',
-                    'urgent' => 'require|integer'
-            ],$message);
-            if (!$validate -> check($data)){
-                return json(['code' => 400 , 'message' => $validate -> getError()]);
-            }else{
+                'name' => 'require',
+                'mobile' => 'require|min:11|max:12',
+                'address' => 'require',
+                'goods' => 'require',
+                'urgent' => 'require|integer'
+            ], $message);
+            if (!$validate->check($data)) {
+                return json(['code' => 400, 'message' => $validate->getError()]);
+            } else {
                 $order = new OrdersModel([
-                    'order_id' => date('YmdHis').range(10000,99999),
+                    'order_id' => intval(date('YmdHis').range(10000, 99999)),
                     'name' => $data['name'],
                     'mobile' => $data['mobile'],
                     'address' => $data['address'],
                     'goods' => $data['goods'],
                     'urgent' => $data['urgent'],
-                    'status' => '0',
+                    'status' => 0,
                     'create' => session('username'),
-                    'create_time' => time()
+                    'create_time' => intval(time())
                 ]);
-                if ($order -> save()){
-                    return json(['code' => '200' , 'message' => '添加成功']);
-                }else{
-                    return json(['code' => '500' , 'message' => '添加失败']);
+                if ($order->save()) {
+                    return json(['code' => '200', 'message' => '添加成功']);
+                } else {
+                    return json(['code' => '500', 'message' => '添加失败']);
                 }
             }
-        }else{
-            return view('orders/orders_add',['title' => '添加订单']);
+        } else {
+            return view('orders/orders_add', ['title' => '添加订单']);
         }
     }
 

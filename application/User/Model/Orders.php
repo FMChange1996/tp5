@@ -15,7 +15,9 @@ class Orders extends Model
 {
     use SoftDelete;
 
-    protected $autoWriteTimestamp = true;
+    protected $table = "orders";
+
+//    protected $autoWriteTimestamp = true;
 
     public function getUrgentAttr($value){
         $urgent = [
