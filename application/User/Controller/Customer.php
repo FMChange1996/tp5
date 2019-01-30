@@ -24,6 +24,7 @@ class Customer extends Base
         return view('customer/index',['title' => '客户跟踪' , 'list' => $list]);
     }
 
+    //客户添加操作
     public function Add(){
         if (Request::isPost()){
             $message = [
@@ -41,7 +42,7 @@ class Customer extends Base
                     'wangwang' => $data['wangwang'],
                     'remarks' => Request::param('remarks'),
                     'create' => Session::get('username'),
-                    'create_time' => intval(time())
+                    'create_time' => time()
                 ]);
 
                 if ($customer -> save()){
@@ -54,6 +55,19 @@ class Customer extends Base
 
         }else{
             return view('customer/add',['title' => '添加客户']);
+        }
+    }
+
+    public function Del(){
+        if (Request::isPost()){
+            $id = Request::param('id');
+            if (CustomerModel::destroy($id)){
+                return json(['code' => 200 , 'message' => '删除成功']);
+            }else{
+                return json(['code' => 400 , 'message' => '删除失败']);
+            }
+        }else{
+            return $this -> error('系统错误');
         }
     }
 
