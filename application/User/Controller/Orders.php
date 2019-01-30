@@ -72,13 +72,13 @@ class Orders extends Base
                 'mobile' => 'require|min:11|max:12',
                 'address' => 'require',
                 'goods' => 'require',
-                'urgent' => 'require|integer'
+                'urgent' => 'require'
             ], $message);
             if (!$validate->check($data)) {
                 return json(['code' => 400, 'message' => $validate->getError()]);
             } else {
                 $order = new OrdersModel([
-                    'order_id' => intval(date('YmdHis').range(10000, 99999)),
+                    'order_id' => date('YmdHi') . rand(10000, 99999),
                     'name' => $data['name'],
                     'mobile' => $data['mobile'],
                     'address' => $data['address'],
@@ -86,7 +86,7 @@ class Orders extends Base
                     'urgent' => $data['urgent'],
                     'status' => 0,
                     'create' => session('username'),
-                    'create_time' => intval(time())
+                    'create_time' => time()
                 ]);
                 if ($order->save()) {
                     return json(['code' => '200', 'message' => '添加成功']);
