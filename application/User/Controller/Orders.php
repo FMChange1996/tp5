@@ -28,7 +28,7 @@ class Orders extends Base
                 $list = OrdersModel::where('name',Request::param('searchName')) -> paginate(10);
                 return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count() , 'counts' => $list -> total()]);
             }elseif (!empty(Request::param('urgent'))){
-                
+
             }else{
                 $list = OrdersModel::where('status',0) -> paginate(10);
                 return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count() , 'counts' => $list -> total()]);
@@ -196,9 +196,5 @@ class Orders extends Base
             return $this -> error('操作失败！');
         }
     }
-
-    //订单搜索功能
-    public function Seach(){
-
-    }
+    
 }
