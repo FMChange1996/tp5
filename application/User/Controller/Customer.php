@@ -72,4 +72,16 @@ class Customer extends Base
         }
     }
 
+    public function AddDate(){
+        if (Request::isPost()){
+
+        }elseif (Request::isGet()){
+            $key = Request::param('key');
+            $id = Request::param('id');
+            
+        }else{
+            return $this -> error('访问错误');
+        }
+    }
+
 }
