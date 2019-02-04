@@ -25,7 +25,7 @@
                     <table id="data-table-list" class="table table-border table-bordered table-bg table-hover table-sort">
                         <thead>
                         <tr class="text-c">
-                            <th width="25"><input type="checkbox" name="" value=""></th>
+                            <th width="25"><input type="checkbox" name="" value="" id="checkbox"></th>
                             <th width="80">ID</th>
                             <th>客户旺旺</th>
                             <th>第一次跟踪时间</th>
@@ -40,21 +40,21 @@
                         <tbody class="getData-list" data-currPage='1'>
                         {volist name="list" id="vo"}
                         <tr class="text-c">
-                            <td><input type="checkbox" value="" name=""></td>
+                            <td><input type="checkbox" value="{$vo.id}" name="checkbox" id="check"></td>
                             <td>{$vo.id}</td>
                             <td><a href="https://amos.alicdn.com/getcid.aw?spm=a1z09.1.0.0.105e36064gAzgC&v=3&groupid=0&s=1&charset=utf-8&uid={$vo.wangwang}&site=cntaobao&fromid=cntaobao" target="_blank">{$vo.wangwang}</a></td>
                             {if($vo.first_time == null)}
-                            <td><a href="javascript:;" onclick="first_time('{$vo.id}')" class="btn btn-success radius" >添加</a></td>
+                            <td><a href="javascript:;" onclick="add_time('{$vo.id}','first_time')" class="btn btn-success radius" >添加</a></td>
                             {else /}
                             <td>{$vo.first_time}</td>
                             {/if}
                             {if($vo.second_time == null)}
-                            <td><a href="javascript:;" onclick="second_time('{$vo.id}')" class="btn btn-success radius" >添加</a></td>
+                            <td><a href="javascript:;" onclick="add_time('{$vo.id}','second_time')" class="btn btn-success radius" >添加</a></td>
                             {else /}
                             <td>{$vo.second_time}</td>
                             {/if}
                             {if($vo.third_time == null)}
-                            <td><a href="javascript:;" onclick="third_time('{$vo.id}')" class="btn btn-success radius" >添加</a></td>
+                            <td><a href="javascript:;" onclick="add_time('{$vo.id}','third_time')" class="btn btn-success radius" >添加</a></td>
                             {else /}
                             <td>{$vo.third_time}</td>
                             {/if}
@@ -83,14 +83,6 @@
 
 {block name="script"}
 <script type="text/javascript">
-    function dete() {
-        $("#date").datetimepicker({
-            language:"zh-cn",
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-    }
 
     //单个客户删除
     function member_del(id) {
@@ -119,47 +111,19 @@
         });
     }
 
-    //第一次跟踪时间添加
-    function first_time(id) {
-        layer.open({
-            type: 2 //此处以iframe举例
-            ,title: '添加时间'
-            ,area: ['390px', '330px']
-            ,shade: 0
-            ,offset: 'auto'
-            ,maxmin: true
-            ,content: ['','no']
-            ,scrollbar:false
-            ,btn: ['保存', '关闭'] //只是为了演示
-            ,yes: function(){
-                $(that).click(); //此处只是为了演示，实际使用可以剔除
-            }
-            ,btn2: function(){
-                layer.closeAll();
-            }
-
-            ,zIndex: layer.zIndex //重点1
-            ,success: function(layero){
-                layer.setTop(layero); //重点2
-            }
-        });
-
-
-    }
-
-    //第二次跟踪时间添加
-    function second_time(id) {
-
-    }
-
-    //第三次跟踪时间添加
-    function third_time(id) {
-
-    }
-
     //客户备注
     function edit_remark(id) {
 
+    }
+
+    //全选操作
+    $('#checkbox').on('click',function () {
+        $('#check').attr('checked',"true")
+    });
+
+    //添加时间操作
+    function add_time(id,key) {
+        layer_show('添加时间','{:url('/user/customer/AddDate')}'+ '?id='+ id + '&key=' + key,700,500)
     }
 
 </script>

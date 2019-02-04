@@ -11,9 +11,11 @@ namespace app\User\Controller;
 
 use app\User\Command\Base;
 use app\User\Model\Customer as CustomerModel;
+use think\Db;
 use think\facade\Request;
 use think\facade\Session;
 use think\facade\Validate;
+use think\View;
 
 class Customer extends Base
 {
@@ -74,11 +76,40 @@ class Customer extends Base
 
     public function AddDate(){
         if (Request::isPost()){
+            $data = [
+                'id' => Request::param('id'),
+                'key' => Request::param('key'),
+                'time' => Request::param('time')
+            ];
+
+            $message =[
+                'time.require' => '时间选择不能为空',
+                'id.require' => '默认参数缺损',
+                'key.require' => '默认参数缺损'
+            ];
+
+            $check = Validate::make([
+                'id' => 'require',
+                'key' => 'require',
+                'time' => 'require'
+            ],$message);
+
+            if (!$check -> check($data)){
+                return json(['code' => 400 , 'message' => $check -> getError()]);
+            }else{
+                $find =Db::name('customer') -> where('id',$data['id']);
+                if ($find -> setField($data['key'],$data['time'])){
+                    return json(['code' => 200 , 'message' => '添加成功']);
+                }else{
+                    return json(['code' => 400 , 'message' => '添加失败']);
+                }
+            }
 
         }elseif (Request::isGet()){
             $key = Request::param('key');
             $id = Request::param('id');
-            
+            $find = CustomerModel::where('id',$id) -> find();
+            return view('customer/add_date',['title' => '添加时间','id' => $id , 'key' => $key , 'wangwang' => $find['wangwang']]);
         }else{
             return $this -> error('访问错误');
         }
