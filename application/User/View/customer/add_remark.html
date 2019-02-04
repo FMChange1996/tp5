@@ -14,11 +14,10 @@
             </div>
         </div>
         <input type="hidden" value="{$id}" name="id">
-        <input type="hidden" value="{$key}" name="key">
         <div class="row clearfix">
-            <label class="form-label col-xs-4 col-sm-2">时间：</label>
+            <label class="form-label col-xs-4 col-sm-2">备注：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" id="date" name="time">
+                <textarea class="textarea" name="remarks" id="remarks"></textarea>
             </div>
         </div>
         <div class="row clearfix">
@@ -35,7 +34,7 @@
 <script type="text/javascript">
     $('#submit').on('click',function () {
         $.ajax({
-            url:'{:url('/user/customer/AddDate')}',
+            url:'{:url('/user/customer/AddRemark')}',
             type:'post',
             data:$('#customer_add').serialize(),
             dataType:'json',

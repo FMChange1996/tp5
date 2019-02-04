@@ -21,6 +21,7 @@ class Customer extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 
+    //首页
     public function Index(){
         $list = CustomerModel::paginate(10);
         return view('customer/index',['title' => '客户跟踪' , 'list' => $list]);
@@ -74,6 +75,7 @@ class Customer extends Base
         }
     }
 
+    //添加跟踪时间
     public function AddDate(){
         if (Request::isPost()){
             $data = [
@@ -110,6 +112,44 @@ class Customer extends Base
             $id = Request::param('id');
             $find = CustomerModel::where('id',$id) -> find();
             return view('customer/add_date',['title' => '添加时间','id' => $id , 'key' => $key , 'wangwang' => $find['wangwang']]);
+        }else{
+            return $this -> error('访问错误');
+        }
+    }
+
+    //添加备注
+    public function AddRemark(){
+        if (Request::isPost()){
+            $data = [
+                'id' => Request::param('id'),
+                'remarks' => Request::param('remark')
+            ];
+
+            $message = [
+                'id.require' => '默认参数缺损',
+                'remark.require' => '无法添加空备注'
+            ];
+
+            $validate = Validate::make([
+                'id' => 'require',
+                'remarks' => 'require'
+            ],$message);
+
+            if (!$validate -> check($data)){
+                return json(['code' => 400 ,'message' => $validate -> getError()]);
+            }else{
+                $find = Db::name('customer') -> where('id',$data['id']);
+                if ($find -> setField('remarks',$data['remarks'])){
+                    return json(['code' => 200 , 'message' => '添加成功']);
+                }else{
+                    return json(['code' => 200 , 'message' => '添加成功']);
+                }
+            }
+
+        }elseif (Request::isGet()){
+            $id = Request::param('id');
+            $find = CustomerModel::where('id',$id) -> find();
+            return view('customer/add_remark',['title' => '添加备注' , 'id' => $id , 'wangwang' => $find['wangwang']]);
         }else{
             return $this -> error('访问错误');
         }
