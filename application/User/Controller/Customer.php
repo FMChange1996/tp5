@@ -15,7 +15,6 @@ use think\Db;
 use think\facade\Request;
 use think\facade\Session;
 use think\facade\Validate;
-use think\View;
 
 class Customer extends Base
 {

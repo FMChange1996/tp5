@@ -143,12 +143,12 @@ return [
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle'       => '',
 
-    //分页设置
-    'paginate'               => [
-        'type'      => 'page\Page',
-        'var_page'  => 'page',
-        'list_rows' => 15,
-        'newstyle'  => true,
-    ],
+//    //分页设置
+//    'paginate'               => [
+//        'type'      => 'page\Page',
+//        'var_page'  => 'page',
+//        'list_rows' => 15,
+//        'newstyle'  => true,
+//    ],
 
 ];

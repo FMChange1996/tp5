@@ -8,6 +8,7 @@
 
 namespace app\User\Controller;
 
+use app\Index\Model\Users;
 use app\User\Command\Base;
 use app\User\Model\Role;
 use app\User\Model\Rule;
@@ -18,13 +19,16 @@ class System extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 
+    //管理员列表
     public function UserList(){
-        return view('system/user_list',['title' => '管理员列表']);
+        $list = Users::paginate(10);
+        return view('system/user_list',['title' => '管理员列表' , 'list' =>  $list , 'count' => $list -> count()]);
     }
 
+    //权限管理
     public function UserRule(){
         $list = Rule::paginate(10);
-        return view('system/user_rule',['title' => '管理员权限' , 'list' => $list , 'count' => $list -> count()]);
+        return view('system/user_rule',['title' => '管理员权限' , 'list' => $list ,  'count' => $list -> count()]);
     }
 
     public function UserInfo(){

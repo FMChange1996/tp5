@@ -13,6 +13,12 @@ use think\Model;
 
 class Users extends Model
 {
-
+    public function getStatusAttr($value){
+        $status = [
+            '0' => '启用',
+            '1' => '禁用'
+        ];
+        return $status[$value];
+    }
 
 }
