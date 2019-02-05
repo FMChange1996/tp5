@@ -24,13 +24,26 @@
             </div>
         </div>
         <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>手机号：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" id="mobile" name="mobile" >
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>邮箱：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <input type="email" class="input-text" id="mail" name="mail" >
+            </div>
+        </div>
+        <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>角色：</label>
             <div class="form-controls col-xs-8 col-sm-9">
                 <span class="select-box">
                     <select class="select" name="role">
                         <option selected>选择</option>
-                        <option value="1">启用</option>
-                        <option value="0">禁用</option>
+                        {volist name="role" id="vo"}
+                        <option value="{$vo.id}">{$vo.title}</option>
+                        {/volist}
                     </select>
                 </span>
             </div>
@@ -62,7 +75,7 @@
 <script type="text/javascript">
     $('#submit').on('click',function () {
         $.ajax({
-            url:'{:url('/user/system/addrule')}',
+            url:'{:url('/User/System/AddUser')}',
             type:'post',
             data:$('#rule_add').serialize(),
             dataType:'json',
@@ -71,7 +84,7 @@
                     layer.msg(response.message,{icon:6,time:700,end:function () {
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
-                            window.parent.location.replace("{:url('/User/System/UserRule')}");
+                            window.parent.location.replace("{:url('/User/System/UserList')}");
                         }})
                 } else{
                     layer.msg(response.message,{icon:5,time:700});

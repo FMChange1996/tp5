@@ -23,7 +23,7 @@ class Customer extends Base
     //首页
     public function Index(){
         $list = CustomerModel::paginate(10);
-        return view('customer/index',['title' => '客户跟踪' , 'list' => $list]);
+        return view('customer/index',['title' => '客户跟踪' , 'list' => $list ,'count' => $list -> count()]);
     }
 
     //客户添加操作

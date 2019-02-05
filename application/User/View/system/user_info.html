@@ -17,51 +17,35 @@
             <div class="panel-body">
                 <div class="mt-20 clearfix">
                     <form class="form form-horizontal" id="rule_add">
+                        {volist name="user" id="vo"}
                         <div class="row clearfix">
-                            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>登录名：</label>
+                            <label class="form-label col-xs-4 col-sm-2">登录名：</label>
                             <div class="form-controls col-xs-8 col-sm-9">
-                                <input type="text" class="input-text" id="username" name="username">
+                                <input type="text" class="input-text" id="username" name="username" value="{$vo.username}" disabled="disabled">
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>密码：</label>
+                            <label class="form-label col-xs-4 col-sm-2">密码：</label>
                             <div class="form-controls col-xs-8 col-sm-9">
                                 <input type="password" class="input-text" id="password" name="password" >
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>重复密码：</label>
+                            <label class="form-label col-xs-4 col-sm-2">手机号：</label>
                             <div class="form-controls col-xs-8 col-sm-9">
-                                <input type="password" class="input-text" id="reastpw" name="reastpw" >
+                                <input type="text" class="input-text" name="mobile" value="{$vo.mobile}">
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>角色：</label>
+                            <label class="form-label col-xs-4 col-sm-2">邮箱：</label>
                             <div class="form-controls col-xs-8 col-sm-9">
-                <span class="select-box">
-                    <select class="select" name="role">
-                        <option selected>选择</option>
-                        <option value="1">启用</option>
-                        <option value="0">禁用</option>
-                    </select>
-                </span>
+                                <input type="text" class="input-text" name="mail" value="{$vo.mail}">
                             </div>
                         </div>
-                        <div class="row clearfix">
-                            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>启用类型：</label>
-                            <div class="form-controls col-xs-8 col-sm-9">
-                <span class="select-box">
-                    <select class="select" name="status">
-                        <option selected>选择</option>
-                        <option value="1">启用</option>
-                        <option value="0">禁用</option>
-                    </select>
-                </span>
-                            </div>
-                        </div>
+                        {/volist}
                         <div class="row clearfix">
                             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                                <button class="btn btn-primary radius" type="button" id="submit"><i class="Hui-iconfont">&#xe632;</i> 添加保存</button>
+                                <button class="btn btn-primary radius" type="button" id="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
                             </div>
                         </div>
                     </form>

@@ -32,7 +32,8 @@ class System extends Base
     }
 
     public function UserInfo(){
-        return view('system/user_info',['title' => '个人信息']);
+        $user = Users::all();
+        return view('system/user_info',['title' => '个人信息','user' => $user]);
     }
 
     //角色管理
@@ -129,7 +130,8 @@ class System extends Base
         if (Request::isPost()){
 
         }elseif (Request::isGet()){
-
+            $role = Role::all();
+            return view('system/add_admin',['title' => '添加成员', 'role' => $role]);
         }else{
             return $this -> error('访问失败');
         }
