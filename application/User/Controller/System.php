@@ -35,10 +35,7 @@ class System extends Base
         return view('system/user_info',['title' => '个人信息']);
     }
 
-    public function Setting(){
-
-    }
-
+    //角色管理
     public function UserRole(){
         $list = Role::select();
         return view('system/user_role',['title' => '角色管理','list' => $list ,'count' => $list -> count()]);
@@ -125,6 +122,17 @@ class System extends Base
             return view('system/role_add',['title' => '添加角色','list' => $list , 'count' => $list -> count()]);
         }
 
+    }
+
+    //添加成员
+    public function AddUser(){
+        if (Request::isPost()){
+
+        }elseif (Request::isGet()){
+
+        }else{
+            return $this -> error('访问失败');
+        }
     }
 
 }
