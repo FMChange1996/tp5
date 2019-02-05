@@ -31,6 +31,7 @@ class System extends Base
         return view('system/user_rule',['title' => '管理员权限' , 'list' => $list ,  'count' => $list -> count()]);
     }
 
+    //成员个人信息
     public function UserInfo(){
         $user = Users::all();
         return view('system/user_info',['title' => '个人信息','user' => $user]);
