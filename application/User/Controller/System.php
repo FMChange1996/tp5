@@ -129,6 +129,68 @@ class System extends Base
     //添加成员
     public function AddUser(){
         if (Request::isPost()){
+            $data = [
+                'username' => Request::param('username'),
+                'password' => Request::param('password'),
+                'reastpw' => Request::param('reastpw'),
+                'mobile' => Request::param('mobile'),
+                'mail' => Request::param('mail'),
+                'role' => Request::param('role'),
+                'status' => Request::param('status')
+            ];
+
+            $message = [
+                'username.require' => '用户名不能为空',
+                'password.require' => '密码不能为空',
+                'password.min' => '密码长度不能少于8位',
+                'restpw.require' => '验证密码不能为空',
+                'mobile.require' => '手机号不能为空',
+                'mobile.min' => '手机号长度不符合规则',
+                'mobile.max' => '手机号长度不符合规则',
+                'mail.require' => '邮箱不能为空',
+                'role.require' => '成员角色必须选择',
+                'status.require' => '成员状态必须选择'
+            ];
+
+            $validate = Validate::make([
+                'username' => 'require',
+                'password' => 'require|min:8',
+                'reastpw' => 'require',
+                'mobile' => 'require|min:11|max:12',
+                'mail' => 'require',
+                'role' => 'require',
+                'status' => 'require'
+            ],$message);
+
+            if ($data['password'] != $data['reastpw']){
+                return json(['code' => 400 , 'message' => '两次输入密码不同']);
+            }else{
+                if (!$validate -> check($data)){
+                    return json(['code' => 400 , 'message' => $validate -> getError()]);
+                }else{
+                    $user = new Users([
+                        'username' => $data['username'],
+                        'password' => hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2),
+                        'mobile' => $data['mobile'],
+                        'mail' => $data['mail'],
+                        'status' => $data['status']
+                    ]);
+                    if ($user ->save()){
+                        $find = Users::where('username',$data['username']) -> find();
+                        $role = new Role([
+                            'uid' => $find['id'],
+                            'group_id' => $data['role']
+                        ]);
+                        if ($role -> save()){
+                            return json(['code' => 200 , 'message' => '创建成功']);
+                        }else{
+                            return json(['code' => 400 , 'message' => '成员已创建，角色权限创建失败']);
+                        }
+                    }else{
+                        return json(['code' => 400 , 'message' => '成员添加失败']);
+                    }
+                }
+            }
 
         }elseif (Request::isGet()){
             $role = Role::all();

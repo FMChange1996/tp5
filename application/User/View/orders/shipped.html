@@ -51,9 +51,10 @@
                             <th width="80">订单号</th>
                             <th width="260">收件信息</th>
                             <th>清单</th>
-                            <th width="80">加急状态</th>
-                            <th width="80">订单状态</th>
-                            <th width="120">更新时间</th>
+                            <th width="50">加急状态</th>
+                            <th width="50">订单状态</th>
+                            <th width="120">快递单号</th>
+                            <th width="150">更新时间</th>
                             <th width="75">创建者</th>
                         </tr>
                         </thead>
@@ -74,6 +75,7 @@
                             {else / }
                             <td class="td-status"><span class="label label-success radius">{$orders.status}</span></td>
                             {/if}
+                            <td>{$orders.exp_number}</td>
                             <td>{$orders.create_time}</td>
                             <td>{$orders.create}</td>
                         </tr>
