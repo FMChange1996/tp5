@@ -69,14 +69,14 @@
             success:function (response) {
                 if (response.code == 200){
                     layer.msg(response.message,{icon:6,time:700,end:function () {
-                            window.location.replace('{:url('/User/System/UserInfo')}');
-                        }});
-                } else {
+                            window.parent.location.replace("{:url('/User/System/UserInfo')}");
+                        }})
+                } else{
                     layer.msg(response.message,{icon:5,time:700});
                 }
             }
         });
-    });
+    })
 </script>
 
 {/block}
