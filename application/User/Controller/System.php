@@ -13,6 +13,7 @@ use app\Index\Model\Users;
 use app\User\Command\Base;
 use app\User\Model\Role;
 use app\User\Model\Rule;
+use app\User\Model\UserAccess;
 use think\facade\Request;
 use think\Validate;
 use think\facade\Session;
@@ -180,7 +181,7 @@ class System extends Base
                     ]);
                     if ($user ->save()){
                         $find = Users::where('username',$data['username']) -> find();
-                        $role = new Role([
+                        $role = new UserAccess([
                             'uid' => $find['id'],
                             'group_id' => $data['role']
                         ]);
