@@ -9,12 +9,12 @@
 namespace app\Index\controller;
 
 
-use app\Index\model\Users;
+use app\index\model\Users;
 use think\Controller;
 use think\facade\Request;
 use think\facade\Session;
-use app\User\model\UserAccess;
-use app\User\model\Role;
+use app\user\model\UserAccess;
+use app\user\model\Role;
 
 
 class Index extends Controller
