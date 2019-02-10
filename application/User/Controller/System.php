@@ -4,6 +4,7 @@
  * User: qianchao
  * Date: 2019-01-02
  * Time: 19:47
+ * 系统控制器
  */
 
 namespace app\User\Controller;
@@ -199,6 +200,91 @@ class System extends Base
             return view('system/add_admin',['title' => '添加成员', 'role' => $role]);
         }else{
             return $this -> error('访问失败');
+        }
+    }
+
+    //更新成员信息
+    public function UpdateInfo(){
+        if (Request::isPost()){
+            $password = hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2);
+            $username = Request::param('username');
+            $find = Users::where('username',$username) -> find();
+            if ($password == $find['password']){
+                $find = Users::where('username',$username) -> find();
+                $data = [
+                    'mobile' => Request::param('mobile'),
+                    'mail' => Request::param('mail')
+                ];
+                $message = [
+                    'mobile.require' => '手机号不能为空',
+                    'mobile.min' => '手机号格式不正确',
+                    'mobile.max' => '手机号格式不正确',
+                    'mail.require' => '邮箱账号不能为空',
+                    'mail.email' => '邮箱账号格式不正确'
+                ];
+
+                $validate = Validate::make([
+                    'mobile' => 'require|min:11|max:12',
+                    'mail' => 'require|email'
+                ],$message);
+
+                if ($validate -> check($data)){
+                    return json(['code' => 400 , 'message' => $validate -> getError()]);
+                }else{
+                    $find -> mobile = $data['mobile'];
+                    $find -> mail = $data['mail'];
+                    if ($find -> save()){
+                        return json(['code' => 200 , 'message' => '资料更新成功']);
+                    }else{
+                        return json(['code' => 400 , 'message' => '资料更新失败']);
+                    }
+                }
+
+            }elseif ($password != $find['password']){
+                $data = [
+                    'username' => Request::param('username'),
+                    'password' => Request::param('password'),
+                    'mobile' => Request::param('mobile'),
+                    'mail' => Request::param('mail'),
+                ];
+
+                $message = [
+                    'username.require' => '用户名不能为空',
+                    'password.require' => '密码不能为空',
+                    'password.min' => '密码长度不能短于8位',
+                    'mobile.require' => '手机号不能为空',
+                    'mobile.min' => '手机号格式不正确',
+                    'mobile.max' => '手机号格式不正确',
+                    'mail.require' => '邮箱不能为空',
+                    'mail.email' => '邮箱格式不正确'
+                ];
+
+                $validate = Validate::make([
+                    'username' => 'require',
+                    'password' => 'require|min:8',
+                    'mobile' => 'require|min:11|max:12',
+                    'mail' => 'require|email'
+                ],$message);
+
+                if (!$validate -> check($data)){
+                    return json(['code' => 400 , 'message' => $validate -> getError()]);
+                }else{
+                    $find = Users::where('username',$data['username']) -> find();
+                    $find -> password = hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2);
+                    $find -> mobile = $data['mobile'];
+                    $find -> mail = $data['mail'];
+                    if ($find -> save()){
+                        return json(['code' => 200 , 'message' => '资料更新成功']);
+                    }else{
+                        return json(['code' => 400 , 'message' => '资料更新失败']);
+                    }
+                }
+
+            }else{
+                return $this -> error('系统错误');
+            }
+        }else{
+            return $this -> error('访问错误');
         }
     }
 

@@ -21,7 +21,7 @@
                         <div class="row clearfix">
                             <label class="form-label col-xs-4 col-sm-2">登录名：</label>
                             <div class="form-controls col-xs-8 col-sm-9">
-                                <input type="text" class="input-text" id="username" name="username" value="{$vo.username}" disabled="disabled">
+                                <input type="text" class="input-text" id="username" name="username" value="{$vo.username}" readonly="readonly">
                             </div>
                         </div>
                         <div class="row clearfix">
@@ -55,4 +55,28 @@
     </article>
 </div>
 </section>
+{/block}
+
+{block name="script"}
+
+<script type="text/javascript">
+    $('#submit').on('click',function () {
+        $.ajax({
+            url:'{:url('/User/System/UpdateInfo')}',
+            type:'post',
+            data:$('#rule_add').serialize(),
+            dataType:'json',
+            success:function (response) {
+                if (response.code == 200){
+                    layer.msg(response.message,{icon:6,time:700,end:function () {
+                            window.location.replace('{:url('/User/System/UserInfo')}');
+                        }});
+                } else {
+                    layer.msg(response.message,{icon:5,time:700});
+                }
+            }
+        });
+    });
+</script>
+
 {/block}

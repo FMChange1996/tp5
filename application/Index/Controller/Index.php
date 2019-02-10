@@ -32,7 +32,7 @@ class Index extends Controller
             $data = Users::where('username',$username) -> find();
             if ($data['username'] == $username && $data['password'] == $password){
                 Session::set('uid',$data['id']);
-                Session::set('token','fo2j308g2j08233th[w2tj0f2');
+                Session::set('token','dcn3ocqe2mroqw23r0');
                 Session::set('username',$username);
                 return ['code' => 200 , 'message' => '登录成功'];
             }elseif ($data == null){
