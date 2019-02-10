@@ -29,7 +29,7 @@ class Base extends Controller
         $auth = new Auth();
         $request = Request::instance();
         $url = $request -> module().'/'.$request -> controller().'/'.$request -> action();
-        if (!$auth -> check($url,$access_id)){
+        if (!$auth -> check($url,$uid)){
             $this -> error('无权访问！');
         }
     }

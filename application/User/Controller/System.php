@@ -14,6 +14,7 @@ use app\User\Model\Role;
 use app\User\Model\Rule;
 use think\facade\Request;
 use think\Validate;
+use think\facade\Session;
 
 class System extends Base
 {
@@ -33,7 +34,8 @@ class System extends Base
 
     //成员个人信息
     public function UserInfo(){
-        $user = Users::all();
+        $uid = Session::get('uid');
+        $user = Users::where('id',$uid) -> select();
         return view('system/user_info',['title' => '个人信息','user' => $user]);
     }
 
