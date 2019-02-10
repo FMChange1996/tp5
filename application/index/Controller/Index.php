@@ -6,7 +6,7 @@
  * Time: 20:46
  */
 
-namespace app\Index\controller;
+namespace app\index\controller;
 
 
 use app\index\model\Users;
