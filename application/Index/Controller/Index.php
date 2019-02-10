@@ -13,6 +13,8 @@ use app\Index\Model\Users;
 use think\Controller;
 use think\facade\Request;
 use think\facade\Session;
+use app\User\Model\UserAccess;
+use app\User\Model\Role;
 
 
 class Index extends Controller
@@ -34,6 +36,9 @@ class Index extends Controller
                 Session::set('uid',$data['id']);
                 Session::set('token','dcn3ocqe2mroqw23r0');
                 Session::set('username',$username);
+                $group = UserAccess::where('uid',$data['id']) -> find();
+                $name = Role::where('id',$group['group_id']) -> find();
+                Session::set('group',$name['title']);
                 return ['code' => 200 , 'message' => '登录成功'];
             }elseif ($data == null){
                 return ['code' => 400 , 'message' => '该用户不存在！'];
