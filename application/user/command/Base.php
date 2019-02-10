@@ -6,7 +6,7 @@
  * Time: 11:09
  */
 
-namespace app\User\Command;
+namespace app\user\command;
 
 use Auth;
 use think\Controller;

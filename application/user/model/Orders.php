@@ -6,7 +6,7 @@
  * Time: 21:01
  */
 
-namespace app\User\Model;
+namespace app\User\model;
 
 use think\Model;
 use think\model\concern\SoftDelete;

@@ -7,13 +7,13 @@
  * 系统控制器
  */
 
-namespace app\User\Controller;
+namespace app\User\controller;
 
-use app\Index\Model\Users;
-use app\User\Command\Base;
-use app\User\Model\Role;
-use app\User\Model\Rule;
-use app\User\Model\UserAccess;
+use app\index\model\Users;
+use app\user\command\Base;
+use app\user\model\Role;
+use app\user\model\Rule;
+use app\user\model\UserAccess;
 use think\facade\Request;
 use think\Validate;
 use think\facade\Session;

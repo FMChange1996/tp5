@@ -6,13 +6,11 @@
  * Time: 19:33
  */
 
-namespace app\User\Controller;
+namespace app\User\controller;
 
-use app\User\Model\Orders;
-use app\User\Model\Role;
-use app\User\Model\UserAccess;
+use app\user\model\Orders;
 use think\Controller;
-use think\facade\Session;
+
 
 class Index extends Controller
 {

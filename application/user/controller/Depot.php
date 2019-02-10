@@ -6,9 +6,9 @@
  * Time: 22:11
  */
 
-namespace app\User\Controller;
+namespace app\User\controller;
 
-use app\User\Command\Base;
+use app\user\command\Base;
 
 class Depot extends Base
 {

@@ -7,9 +7,9 @@
  * 售后服务模块
  */
 
-namespace app\User\Controller;
+namespace app\User\controller;
 
-use app\User\Command\Base;
+use app\user\command\Base;
 
 class Customerservice extends Base
 {

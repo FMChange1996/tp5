@@ -7,10 +7,10 @@
  * 客户跟踪模块
  */
 
-namespace app\User\Controller;
+namespace app\User\controller;
 
-use app\User\Command\Base;
-use app\User\Model\Customer as CustomerModel;
+use app\user\command\Base;
+use app\user\model\Customer as CustomerModel;
 use think\Db;
 use think\facade\Request;
 use think\facade\Session;

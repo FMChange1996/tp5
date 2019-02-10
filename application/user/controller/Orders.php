@@ -6,12 +6,12 @@
  * Time: 19:51
  */
 
-namespace app\User\Controller;
+namespace app\User\controller;
 
-use app\User\Command\Base;
+use app\user\command\Base;
 use think\facade\Request;
 use think\Validate;
-use app\User\Model\Orders as OrdersModel;
+use app\user\model\Orders as OrdersModel;
 
 class Orders extends Base
 {

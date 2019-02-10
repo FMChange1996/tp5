@@ -6,15 +6,15 @@
  * Time: 20:46
  */
 
-namespace app\Index\Controller;
+namespace app\Index\controller;
 
 
-use app\Index\Model\Users;
+use app\Index\model\Users;
 use think\Controller;
 use think\facade\Request;
 use think\facade\Session;
-use app\User\Model\UserAccess;
-use app\User\Model\Role;
+use app\User\model\UserAccess;
+use app\User\model\Role;
 
 
 class Index extends Controller
