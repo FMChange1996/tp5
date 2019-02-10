@@ -19,7 +19,7 @@ class Customerservice extends Base
         return view('customerservice/index',['title' => '售后登记']);
     }
 
-    public function Pay_Out(){
+    public function PayOut(){
         return view('customerservice/pay_out',['title' => '售后支出']);
     }
 
