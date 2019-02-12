@@ -17,6 +17,6 @@ class Jsb extends Controller
     public function test($tid){
         $client = new HttpClient('','');
         $client -> put('/JSB/rest/logistics/LogisticsDummySendRequest?tid='.$tid);
-        return $client->status.$client->getContent();
+        return $client->getContent();
     }
 }
