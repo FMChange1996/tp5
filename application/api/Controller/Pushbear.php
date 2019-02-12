@@ -16,7 +16,7 @@ class Pushbear
         $seven = new Seven();
         $result = $seven -> SetTitle('test')
             -> SetMessage('1111')
-            -> SetChannel('5579-bcaa5f5b575a556c408a199c88942d78')
+            -> SetChannel('')
             -> pushbear();
         return $result;
     }
