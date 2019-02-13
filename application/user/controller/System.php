@@ -280,7 +280,6 @@ class System extends Base
                         return json(['code' => 400 , 'message' => '资料更新失败']);
                     }
                 }
-
             }else{
                 return $this -> error('系统错误');
             }

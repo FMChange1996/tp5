@@ -21,7 +21,8 @@ class Depot extends Base
     protected $middleware = ['\app\http\middleware\Check'];
 
     public function Index(){
-        return view('depot/index',['title' => '仓储管理']);
+        $list = DepotModel::paginate(15);
+        return view('depot/index',['title' => '仓储管理', 'list' => $list]);
     }
 
     public function Add(){
