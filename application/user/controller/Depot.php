@@ -22,7 +22,7 @@ class Depot extends Base
 
     public function Index(){
         $list = DepotModel::paginate(15);
-        return view('depot/index',['title' => '仓储管理', 'list' => $list]);
+        return view('depot/index',['title' => '仓储管理', 'list' => $list ,'count' => $list -> count()]);
     }
 
     public function Add(){
