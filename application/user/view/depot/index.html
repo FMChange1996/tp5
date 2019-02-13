@@ -73,7 +73,7 @@
                             <td>{$vo.create}</td>
                             <td>{$vo.create_time}</td>
                             <td class="f-14 td-manage">
-                                <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                                <a style="text-decoration:none" class="ml-5" onClick="depot_del('{$vo.id}')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
                             </td>
                         </tr>
                         {/volist}
@@ -85,4 +85,30 @@
         </div>
     </article>
 </div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+
+    function depot_del(id) {
+        $.ajax({
+            url:'{:url('/user/Depot/del')}',
+            type:'post',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function (response) {
+                if (response.code == 200){
+                    layer.msg(respones.message,{icon:6,time:700,end:function () {
+                            window.location.replace('{:url('/user/Depot/index')}')
+                        }})
+                } else {
+                    layer.msg(response.message,{icon:5,time:700})
+                }
+            }
+        })
+    }
+
+</script>
 {/block}
