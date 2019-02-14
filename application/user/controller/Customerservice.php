@@ -29,6 +29,7 @@ class Customerservice extends Base
         return view('customerservice/pay_out',['title' => '售后支出']);
     }
 
+    //添加售后事件
     public function AddAfter(){
         if (Request::isPost()){
             $data = [
@@ -68,5 +69,21 @@ class Customerservice extends Base
         }
     }
 
+    //编辑售后事件
+    public function EditAfter(){
+        if (Request::isGet()){
+            $id = Request::param('id');
+            if (!empty($id)){
+                $find = After::where('id',$id) -> find();
+                return view('customerservice/edit_after',['title' => '编辑售后事件']);
+            }else{
+                return $this -> error('默认参数缺损！');
+            }
+        }elseif (Request::isPost()){
+
+        }else{
+            return $this -> error('访问错误！');
+        }
+    }
 
 }
