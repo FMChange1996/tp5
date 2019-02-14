@@ -97,7 +97,18 @@ class Customerservice extends Base
             ],$message);
 
             if (!$validate -> check($data)){
+                return json(['code' => 400 , 'message' => $validate -> getError()]);
+            }else{
+                $find = After::where('wangwang',$data['wangwang']) -> data([
+                    'text' => $data['text'],
+                    'status' => $data['status']
+                ]);
 
+                if ($find -> update()){
+                    return json(['code' => 200 , 'message' => '更新成功！']);
+                }else{
+                    return json(['code' => 400 , 'message' => '更新失败！']);
+                }
             }
         }else{
             return $this -> error('访问错误！');
