@@ -25,7 +25,7 @@ class Orders extends Base
     public function WaitOut(){
         if (Request::isGet()){
             if (!empty(Request::param('searchName'))){
-                $list = OrdersModel::where('name',Request::param('searchName')) -> find();
+                $list = OrdersModel::where('status',0) -> where('name',Request::param('searchName')) -> find();
                 return view('orders/wait_out',['title' => '待发货', 'list' => $list , 'count' => $list -> count()]);
             }else{
                 $list = OrdersModel::where('status',0) -> paginate(10);
