@@ -50,7 +50,7 @@
                     <table id="data-table-list" class="table table-border table-bordered table-bg table-hover table-sort">
                         <thead>
                         <tr class="text-c">
-                            <th width="25"><input type="checkbox" name="" value="" id="check_all"></th>
+                            <th width="25"><input type="checkbox" name="checkbox" value="" id="check_all"></th>
                             <th width="80">订单号</th>
                             <th width="260">收件信息</th>
                             <th>清单</th>
@@ -64,7 +64,7 @@
                         <tbody class="getData-list" data-currPage='1'>
                         {volist name="list" id="orders"}
                         <tr class="text-c">
-                            <td><input type="checkbox" value="{$orders.id}" name=""></td>
+                            <td><input type="checkbox" value="{$orders.id}" name="" id="tb"></td>
                             <td>{$orders.order_id}</td>
                             <td class="text-l">{$orders.name}<br>{$orders.mobile}<br>{$orders.address}</td>
                             <td>{$orders.goods}</td>
@@ -124,7 +124,17 @@
             }
         });
     }
-    
+
+    $(function () {
+        $("input[name=checkbox]").click(function () {
+            if (this.checked){
+                $('#tb:checked').prop("checked",true);
+            }else {
+                $('#tb:checked').prop("checked",false);
+            }
+        })
+    })
+
     function download_file() {
         
     }
