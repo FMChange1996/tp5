@@ -75,7 +75,7 @@ class Customerservice extends Base
             $id = Request::param('id');
             if (!empty($id)){
                 $find = After::where('id',$id) -> find();
-                return view('customerservice/edit_after',['title' => '编辑售后事件']);
+                return view('customerservice/edit_after',['title' => '编辑售后事件' ,'vo' => $find]);
             }else{
                 return $this -> error('默认参数缺损！');
             }
