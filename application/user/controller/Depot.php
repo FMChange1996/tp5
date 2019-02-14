@@ -25,6 +25,7 @@ class Depot extends Base
         return view('depot/index',['title' => '仓储管理', 'list' => $list ,'count' => $list -> count()]);
     }
 
+    //添加操作
     public function Add(){
         if (Request::isPost()){
             $data = [
@@ -77,6 +78,21 @@ class Depot extends Base
             return view('depot/add',['title' => '添加库存']);
         }else{
             return $this -> error('访问错误');
+        }
+    }
+
+    //删除操作
+    public function Del(){
+        if (Request::isPost()){
+            $id = Request::param('id');
+            $find = DepotModel::where('id',$id) -> find();
+            if ($find -> delete()){
+                return json(['code' => 200 , 'message' => '删除成功！']);
+            }else{
+                return json(['code' => 400 , 'message' => '删除失败！']);
+            }
+        }else{
+            return $this -> error('访问错误！');
         }
     }
 }

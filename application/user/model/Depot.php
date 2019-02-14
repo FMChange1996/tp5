@@ -10,9 +10,12 @@ namespace app\user\model;
 
 
 use think\Model;
+use think\model\concern\SoftDelete;
 
 class Depot extends Model
 {
+    use SoftDelete;
+
     public function getMethodAttr($value){
         $method = [
             '0' => '挂钩加工',
