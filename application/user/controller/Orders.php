@@ -40,7 +40,7 @@ class Orders extends Base
     public function Shipped(){
         if (Request::isGet()){
             if (!empty(Request::param('searchName'))){
-                $list =OrdersModel::where('name',Request::param('searchName')) -> paginate(10);
+                $list =OrdersModel::where('status',1) -> where('name',Request::param('searchName')) -> paginate(10);
                 return view('orders/shipped',['title' => '已发货','list' => $list ,'count' => $list -> count()]);
             }else{
                 $list = OrdersModel::where('status',1) -> paginate(10);
