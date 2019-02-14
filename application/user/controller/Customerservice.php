@@ -10,13 +10,15 @@
 namespace app\User\controller;
 
 use app\user\command\Base;
+use app\user\model\After;
 
 class Customerservice extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
 
     public function Index(){
-        return view('customerservice/index',['title' => '售后登记']);
+        $list = After::paginate(10);
+        return view('customerservice/index',['title' => '售后登记' , 'list' => $list , 'count' => $list -> count()]);
     }
 
     public function PayOut(){
