@@ -115,4 +115,23 @@ class Customerservice extends Base
         }
     }
 
+    //删除售后事件
+    public function DelAfter(){
+        if (Request::isDelete()){
+            $id = Request::param('id');
+            if (!empty($id)){
+                $find = After::where('id',$id);
+                if ($find -> delete()){
+                    return json(['code' => 200 , 'message' => '删除成功！']);
+                }else{
+                    return json(['code' => 400 , 'message' => '删除失败！']);
+                }
+            }else{
+                return json(['code' => 400 , 'message' => '参数缺损，请联系开发者！']);
+            }
+        }else{
+            return $this -> error('非法访问！');
+        }
+    }
+
 }
