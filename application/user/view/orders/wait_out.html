@@ -40,7 +40,7 @@
             <div class="panel-body">
                 <div class="clearfix">
 							<span class="f-l">
-                            <a href="javascript:;" onclick="#" class="btn btn-default radius"><i class="Hui-iconfont">&#xe640;</i>批量下载</a>
+                            <a href="javascript:;" onclick="download_file()" class="btn btn-default radius"><i class="Hui-iconfont">&#xe640;</i>批量下载</a>
 							<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 							<a class="btn btn-primary radius" onclick="layer_show('添加订单','{:url('/User/Orders/Add')}')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加订单</a>
 							</span>
@@ -137,8 +137,27 @@
 
 
 
-    function download_file() {
-        
+    function download_file(argument) {
+        var id = document.getElementsByName('checkbox');
+        var value = new Array();
+        for (var i = 0; i < id.length; i++ ){
+            if (id[i].checked){
+                value.push(id[i].value);
+            }
+        }
+        window.location.href="/User/Orders/DownloadFile?id="+value;
+        // $.ajax({
+        //     url:'{:url('/User/Orders/DownloadFile')}',
+        //     type:'get',
+        //     data:{
+        //         id:value
+        //     },
+        //     dataType:'json',
+        //     success:function (response) {
+        //        alert(response);
+        //     }
+        //
+        // })
     }
 
 </script>

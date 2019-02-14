@@ -16,13 +16,13 @@ class Excel
     public function ExportExcel($data,$name = 'excel'){
         $excel = new PHPExcel();
         iconv('UTF-8','gb2312',$name);
-        $header= ['ID','收件人信息','清单','物流单号','创建时间'];
+        $header= ['ID','收件人名字','收件人电话','收件人地址','清单','创建时间'];
         $excel->setActiveSheetIndex(0);
         $excel->getActiveSheet()->setTitle($name); //设置表名
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(18);
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(80);
 
-        $letter = ['A','B','C','D','E'];//列坐标
+        $letter = ['A','B','C','D','E','F'];//列坐标
 
         //生成表头
         for($i=0;$i<count($header);$i++)
@@ -52,10 +52,11 @@ class Excel
         {
             //从第二行开始写入数据（第一行为表头）
             $excel->getActiveSheet()->setCellValue('A'.($k+2),$v['id']);
-            $excel->getActiveSheet()->setCellValue('B'.($k+2),$v['name'].'\n'.$v['mobile'].'\n'.$v['address']);
-            $excel->getActiveSheet()->setCellValue('C'.($k+2),$v['goods']);
-            $excel->getActiveSheet()->setCellValue('D'.($k+2),$v['exp_number']);
-            $excel->getActiveSheet()->setCellValue('E'.($k+2),$v['create_time']);
+            $excel->getActiveSheet()->setCellValue('B'.($k+2),$v['name']);
+            $excel->getActiveSheet()->setCellValue('C'.($k+2),$v['mobile']);
+            $excel->getActiveSheet()->setCellValue('D'.($k+2),$v['address']);
+            $excel->getActiveSheet()->setCellValue('E'.($k+2),$v['goods']);
+            $excel->getActiveSheet()->setCellValue('F'.($k+2),$v['create_time']);
         }
 
         //设置单元格边框

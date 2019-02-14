@@ -12,6 +12,7 @@ use app\user\command\Base;
 use think\facade\Request;
 use think\Validate;
 use app\user\model\Orders as OrdersModel;
+use Excel;
 
 class Orders extends Base
 {
@@ -192,6 +193,14 @@ class Orders extends Base
         }else{
             return $this -> error('操作失败！');
         }
+    }
+
+    //批量下载订单操作
+    public function DownloadFile(){
+        $id = Request::param('id');
+        $list = OrdersModel::all($id);
+        $excel = new Excel();
+        return $excel -> ExportExcel($list);
     }
 
 }
