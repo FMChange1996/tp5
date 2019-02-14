@@ -80,7 +80,25 @@ class Customerservice extends Base
                 return $this -> error('默认参数缺损！');
             }
         }elseif (Request::isPost()){
+            $data = [
+                'wangwang' => Request::param('wangwang'),
+                'text' => Request::param('text'),
+                'status' => Request::param('status')
+            ];
 
+            $message = [
+                'wangwang.require' => '旺旺名参数缺损',
+                'status.require' => '处理状态必须选择'
+            ];
+
+            $validate = Validate::make([
+                'wangwang' => 'require',
+                'status' => 'require'
+            ],$message);
+
+            if (!$validate -> check($data)){
+                
+            }
         }else{
             return $this -> error('访问错误！');
         }
