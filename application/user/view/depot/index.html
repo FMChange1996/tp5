@@ -103,7 +103,7 @@
                     dataType:'json',
                     success:function (response) {
                         if (response.code == 200){
-                            layer.msg(respones.message,{icon:6,time:700,end:function () {
+                            layer.msg(response.message,{icon:6,time:700,end:function () {
                                     window.location.replace('{:url('/user/Depot/index')}')
                                 }})
                         } else {
