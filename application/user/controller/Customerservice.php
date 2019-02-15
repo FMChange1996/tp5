@@ -16,7 +16,6 @@ use think\facade\Validate;
 use think\facade\Session;
 use app\user\model\Payout;
 
-
 class Customerservice extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
@@ -136,4 +135,39 @@ class Customerservice extends Base
         }
     }
 
+    public function AddPayout(){
+        if (Request::isPost()){
+            $data = [
+                'wangwang' => Request::param('wangwang'),
+                'zhifubao' => Request::param('zhifubao'),
+                'number' => Request::param('number'),
+                'text' => Request::param('text')
+            ];
+
+            $message = [
+                'wangwang.require' => '旺旺名不能为空',
+                'zhifubao.require' => '支付宝账号不能为空',
+                'number.require' => '转账金额不能为空',
+                'number.number' => '转账金额不符合规则',
+                'text.require' => '转账理由不能为空'
+            ];
+
+            $validate = Validate::make([
+                'wangwang' => 'require',
+                'zhifubao' => 'require',
+                'number' => 'require|number',
+                'text' => 'require'
+            ],$message);
+            if (!$validate -> check($data)){
+                return json(['code' => 400 , 'message' => $validate -> getError()]);
+            }else{
+
+            }
+
+        }elseif (Request::isGet()){
+            return view('customerservice/add_payout',['title' => '添加售后支出']);
+        }else{
+            return $this -> error('非法访问！');
+        }
+    }
 }
