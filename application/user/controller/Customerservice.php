@@ -161,7 +161,20 @@ class Customerservice extends Base
             if (!$validate -> check($data)){
                 return json(['code' => 400 , 'message' => $validate -> getError()]);
             }else{
+                $payout = new Payout([
+                    'wangwang' => $data['wangwang'],
+                    'zhifubao' => $data['zhifubao'],
+                    'number' => $data['number'],
+                    'text' => $data['text'],
+                    'status' => 0,
+                    'create' => Session::get('username')
+                ]);
 
+                if ($payout -> save()){
+                    return json(['code' => 200 , 'message' => '添加成功！']);
+                }else{
+                    return json(['code' => 400 , 'message' => '添加失败！']);
+                }
             }
 
         }elseif (Request::isGet()){
