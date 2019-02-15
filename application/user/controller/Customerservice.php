@@ -121,8 +121,7 @@ class Customerservice extends Base
         if (Request::isDelete()){
             $id = Request::param('id');
             if (!empty($id)){
-                $find = After::where('id',$id);
-                if ($find -> delete()){
+                if (After::destroy($id)){
                     return json(['code' => 200 , 'message' => '删除成功！']);
                 }else{
                     return json(['code' => 400 , 'message' => '删除失败！']);
@@ -190,8 +189,7 @@ class Customerservice extends Base
         if (Request::isDelete()){
             $id = Request::param('id');
             if (!empty($id)){
-                $find = Payout::where('id',$id);
-                if ($find -> delete()){
+                if (Payout::destroy($id)){
                     return json(['code' => 200 , 'message' => '删除成功!']);
                 }else{
                     return json(['code' => 400 , 'message' => '删除失败！']);
@@ -202,6 +200,16 @@ class Customerservice extends Base
         }else{
             return $this -> error('非法访问');
         }
+    }
+
+    //审核操作
+    public function Shenhe(){
+
+    }
+
+    //转账操作
+    public function Zhuanzhang(){
+       
     }
 
 
