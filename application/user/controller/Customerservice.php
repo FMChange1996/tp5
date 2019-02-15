@@ -14,6 +14,7 @@ use app\user\model\After;
 use think\facade\Request;
 use think\facade\Validate;
 use think\facade\Session;
+use app\user\model\Payout;
 
 
 class Customerservice extends Base
@@ -26,7 +27,8 @@ class Customerservice extends Base
     }
 
     public function PayOut(){
-        return view('customerservice/pay_out',['title' => '售后支出']);
+        $list = Payout::paginate(10);
+        return view('customerservice/pay_out',['title' => '售后支出','list' => $list , 'count' => $list -> count()]);
     }
 
     //添加售后事件
