@@ -179,8 +179,12 @@ class Orders extends Base
             if (empty($exp_num)){
                 return json(['code' => 400 ,'message' => '物流单号不能为空']);
             }else{
-                $find = OrdersModel::where('id',$id) -> data(['exp_number' => $exp_num]);
+                $find = OrdersModel::where('id',$id) -> data([
+                    'exp_number' => $exp_num,
+                    'status' => 1
+                ]);
                 if ($find -> update()){
+
                     return json(['code' => 200 , 'message' => '发货成功']);
                 }else{
                     return json(['code' => 400 , 'message' => '发货失败']);
