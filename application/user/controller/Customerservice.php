@@ -156,7 +156,7 @@ class Customerservice extends Base
             $validate = Validate::make([
                 'wangwang' => 'require',
                 'zhifubao' => 'require',
-                'number' => 'require|number',
+                'number' => 'require|float',
                 'text' => 'require'
             ],$message);
             if (!$validate -> check($data)){
@@ -184,4 +184,25 @@ class Customerservice extends Base
             return $this -> error('非法访问！');
         }
     }
+
+    //删除售后支出
+    public function DelPayout(){
+        if (Request::isDelete()){
+            $id = Request::param('id');
+            if (!empty($id)){
+                $find = Payout::where('id',$id);
+                if ($find -> delete()){
+                    return json(['code' => 200 , 'message' => '删除成功!']);
+                }else{
+                    return json(['code' => 400 , 'message' => '删除失败！']);
+                }
+            }else{
+                return json(['code' => 400 , 'message' => '默认参数缺损!']);
+            }
+        }else{
+            return $this -> error('非法访问');
+        }
+    }
+
+
 }
