@@ -16,6 +16,13 @@ class Payout extends Model
 {
     use SoftDelete;
 
-
+    public function getStatusAttr($value){
+        $status = [
+            '0' => '待处理',
+            '1' => '处理中',
+            '2' => '已完结'
+        ];
+        return $status[$value];
+    }
 
 }
