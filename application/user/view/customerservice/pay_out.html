@@ -95,7 +95,7 @@
                             <td>{$vo.create_time}</td>
                             <td class="f-14 td-manage">
                                 {if($vo.status == "待审核")}
-                                <a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架">审核</a>
+                                <a style="text-decoration:none" onClick="VerifyPayout('{$vo.id}')" href="javascript:;" title="审核">审核</a>
                                 {elseif $vo.status == "待转账" /}
                                 <a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架">转账</a>
                                 {else /}
