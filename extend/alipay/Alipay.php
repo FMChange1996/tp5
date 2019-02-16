@@ -22,6 +22,8 @@ class Alipay
         $this -> aop = new AopClient();
         $this -> aop -> gatewayUrl = "https://openapi.alipay.com/gateway.do";
         $this -> aop -> appId = "2019021463231497"; //  应用AppId
+        $this -> aop -> rsaPrivateKey = "";
+        $this -> aop -> alipayrsaPublicKey = "";
         $this -> aop -> apiVersion = '1.0';
         $this -> aop -> signType = 'RSA2';
         $this -> aop -> postCharset = 'UTF-8';
@@ -33,15 +35,13 @@ class Alipay
         $order_id = date('YmdHis').rand(10000,99999);
         $request = new AlipayFundTransToaccountTransferRequest();
         $request -> setBizContent("{" .
-            "\"out_biz_no\":\".$order_id.\"," .
+            "\"out_biz_no\":\"$order_id\"," .
             "\"payee_type\":\"ALIPAY_LOGONID\"," .
-            "\"payee_account\":\".$account.\"," .
-            "\"amount\":\".$money.\"" .
-            "  }");
-        $result = $this -> aop ->execute ($request);
-
-        $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
-        return  $result -> $responseNode -> sub_msg;
+            "\"payee_account\":\"$account\"," .
+            "\"amount\":\"$money\"".
+            " }");
+        $result = $this -> aop -> execute ($request);
+        return json($result);
     }
 
 }

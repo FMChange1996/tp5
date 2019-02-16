@@ -225,7 +225,7 @@ class Customerservice extends Base
     //转账操作
     public function Zhuanzhang(){
        $alipay = new Alipay();
-       return $alipay -> AlipayTransfer('15958558433','0.20');
+       return $alipay -> AlipayTransfer('15958558433','0.1');
     }
 
 
