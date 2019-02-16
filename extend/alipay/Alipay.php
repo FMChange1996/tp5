@@ -17,13 +17,16 @@ class Alipay
 {
     protected $aop;
 
+    public $rsaPrivateKey = "";
+
+    public $alipayrsaPublicKey  = "";
 
     public function __construct(){
         $this -> aop = new AopClient();
         $this -> aop -> gatewayUrl = "https://openapi.alipay.com/gateway.do";
         $this -> aop -> appId = "2019021463231497"; //  应用AppId
-        $this -> aop -> rsaPrivateKey = "";
-        $this -> aop -> alipayrsaPublicKey = "";
+        $this -> aop -> rsaPrivateKey = $this -> rsaPrivateKey;
+        $this -> aop -> alipayrsaPublicKey = $this ->alipayrsaPublicKey;
         $this -> aop -> apiVersion = '1.0';
         $this -> aop -> signType = 'RSA2';
         $this -> aop -> postCharset = 'UTF-8';
