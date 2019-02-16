@@ -205,7 +205,17 @@ class Customerservice extends Base
     //审核操作
     public function VerifyPayout(){
         if (Request::isPut()){
-
+            $id = Request::param('id');
+            if (!empty($id)){
+                $find = Payout::where('id',$id) -> data(['status' => 1]);
+                if ($find -> update()){
+                    return json(['code' => 200]);
+                }else{
+                    return json(['code' => 400 , 'message' => '未知错误']);
+                }
+            }else{
+                return json(['code' => 400 , 'message' => '接受参数缺损！']);
+            }
         }else{
             return $this -> error('非法访问！');
         }

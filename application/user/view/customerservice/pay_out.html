@@ -142,6 +142,29 @@
             }
         })
     }
+
+    function VerifyPayout(id) {
+        layer.confirm('审核是否通过',{
+            btn:['通过','不通过'],
+            yes:function () {
+                $.ajax({
+                    url:'{:url('/User/Customerservice/VerifyPayout')}',
+                    type:'put',
+                    data:{
+                        id:id
+                    },
+                    dataType:'json',
+                    success:function (response) {
+                        if (response.code == 200 ){
+                            window.location.replace("{:url('/User/Customerservice/Payout')}")
+                        } else {
+                            layer.msg(response.message,{icon:5,time:700})
+                        }
+                    }
+                })
+            }
+        })
+    }
 </script>
 
 {/block}
