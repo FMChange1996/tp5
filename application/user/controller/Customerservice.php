@@ -15,6 +15,7 @@ use think\facade\Request;
 use think\facade\Validate;
 use think\facade\Session;
 use app\user\model\Payout;
+use alipay\Alipay;
 
 class Customerservice extends Base
 {
@@ -223,7 +224,8 @@ class Customerservice extends Base
 
     //转账操作
     public function Zhuanzhang(){
-       
+       $alipay = new Alipay();
+       return $alipay -> AlipayTransfer('15958558433','0.20');
     }
 
 
