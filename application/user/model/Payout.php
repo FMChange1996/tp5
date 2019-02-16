@@ -18,8 +18,8 @@ class Payout extends Model
 
     public function getStatusAttr($value){
         $status = [
-            '0' => '待处理',
-            '1' => '处理中',
+            '0' => '待审核',
+            '1' => '待转账',
             '2' => '已完结'
         ];
         return $status[$value];

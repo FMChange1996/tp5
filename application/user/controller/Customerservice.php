@@ -203,8 +203,12 @@ class Customerservice extends Base
     }
 
     //审核操作
-    public function Shenhe(){
+    public function VerifyPayout(){
+        if (Request::isPut()){
 
+        }else{
+            return $this -> error('非法访问！');
+        }
     }
 
     //转账操作
