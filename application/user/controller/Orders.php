@@ -96,7 +96,7 @@ class Orders extends Base
                     'create_time' => time()
                 ]);
                 if ($order->save()) {
-                    if ($order['urgent'] == "0"){
+                    if ($order['urgent'] == "正常"){
                         $status = "正常";
                     }else{
                         $status = "加急";
