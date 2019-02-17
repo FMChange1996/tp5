@@ -291,4 +291,22 @@ class System extends Base
         }
     }
 
+    //编辑成员信息
+    public function EditUser(){
+        if (Request::isPut()){
+
+        }elseif(Request::isGet()){
+            $id = Request::param('id');
+            if (!empty($id)){
+                $vo = Users::where('id',$id) -> find();
+                $role = Role::all();
+                return view('system/edit_user',['title' => '编辑成员信息', 'vo' => $vo , 'role' => $role]);
+            }else{
+                return $this -> error('未接收到默认参数！');
+            }
+        }else{
+
+        }
+    }
+
 }
