@@ -225,6 +225,12 @@ class Customerservice extends Base
     //转账操作
     public function TransferPayout(){
        $alipay = new Alipay();
+       if (Request::isPut()){
+            $id = Request::param('id');
+
+       }else{
+           return $this -> error('非法访问！');
+       }
        return $alipay -> AlipayTransfer('15958558433','0.1');
     }
 

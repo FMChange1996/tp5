@@ -97,7 +97,7 @@
                                 {if($vo.status == "待审核")}
                                 <a style="text-decoration:none" onClick="VerifyPayout('{$vo.id}')" href="javascript:;" title="审核">审核</a>
                                 {elseif $vo.status == "待转账" /}
-                                <a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架">转账</a>
+                                <a style="text-decoration:none" onClick="TransferPayout('{$vo.id}')" href="javascript:;" title="转账">转账</a>
                                 {else /}
                                 {/if}
                                 <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
@@ -118,6 +118,7 @@
 
 {block name="script"}
 <script type="text/javascript">
+    //删除操作
     function paydel(id) {
         layer.confirm('确定要删除吗?',{
             btn:['确定','取消'],
@@ -143,20 +144,24 @@
         })
     }
 
-    function VerifyPayout(id) {
-        layer.confirm('审核是否通过',{
-            btn:['通过','不通过'],
+    //审核操作
+    function VerifyPayout(id)
+
+    //转账操作
+    function TransferPayout(id) {
+        layer.confirm('确定转账到对方支付宝账号吗？',{
+            btn:['确定','取消'],
             yes:function () {
                 $.ajax({
-                    url:'{:url('/User/Customerservice/VerifyPayout')}',
+                    url:"{:url('/User/Customerservice/TransferPayout')}",
                     type:'put',
-                    data:{
-                        id:id
-                    },
+                    data:{id:id},
                     dataType:'json',
                     success:function (response) {
-                        if (response.code == 200 ){
-                            window.location.replace("{:url('/User/Customerservice/Payout')}")
+                        if (response.code == 200){
+                            layer.msg(response.message,{icon:6,time:700,end:function () {
+                                    window.location.replace("{:url('/User/Customersercive/Payout')}")
+                                }})
                         } else {
                             layer.msg(response.message,{icon:5,time:700})
                         }
