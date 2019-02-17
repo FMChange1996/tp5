@@ -13,6 +13,7 @@ use think\facade\Request;
 use think\Validate;
 use app\user\model\Orders as OrdersModel;
 use Excel;
+use Seven;
 
 class Orders extends Base
 {
@@ -95,6 +96,16 @@ class Orders extends Base
                     'create_time' => time()
                 ]);
                 if ($order->save()) {
+                    if ($order['urgent'] == 0){
+                        $status = "正常";
+                    }else{
+                        $status = "加急";
+                    }
+                    $push = new Seven();
+                    $push -> SetTitle($order['order_id'])
+                        -> SetMessage("收件人名字".$order['name']."\n\n收件人电话：".$order['mobile']."\n\n收件人地址：".$order['address']."\n\n发货清单".$order['goods']."\n\n订单状态：".$status)
+                        -> SetChannel('1943-b81f7a0058d1b527f8315aee1a81e2d0')
+                        -> pushbear();
                     return json(['code' => '200', 'message' => '添加成功']);
                 } else {
                     return json(['code' => '500', 'message' => '添加失败']);
