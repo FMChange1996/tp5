@@ -211,7 +211,6 @@ class System extends Base
             $username = Request::param('username');
             $find = Users::where('username',$username) -> find();
             if ($password == $find['password']){
-                $find = Users::where('username',$username) -> find();
                 $data = [
                     'mobile' => Request::param('mobile'),
                     'mail' => Request::param('mail')
@@ -268,7 +267,12 @@ class System extends Base
                 ],$message);
 
                 if (!$validate -> check($data)){
-                    return json(['code' => 400 , 'message' => $validate -> getError()]);
+                    if ($validate -> getError() == null){
+                        return json(['code' => 400 , 'message' => '出现未知错误！']);
+                    }else{
+                        return json(['code' => 400 , 'message' => $validate -> getError()]);
+                    }
+
                 }else{
                     $find = Users::where('username',$data['username']) -> find();
                     $find -> password = hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2);
