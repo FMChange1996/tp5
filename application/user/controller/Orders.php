@@ -103,7 +103,7 @@ class Orders extends Base
                     }
                     $push = new Seven();
                     $push -> SetTitle($order['order_id'])
-                        -> SetMessage("收件人名字".$order['name']."\n\n收件人电话：".$order['mobile']."\n\n收件人地址：".$order['address']."\n\n发货清单".$order['goods']."\n\n订单状态：".$status)
+                        -> SetMessage("收件人名字：".$order['name']."\n\n收件人电话：".$order['mobile']."\n\n收件人地址：".$order['address']."\n\n发货清单：".$order['goods']."\n\n订单状态：".$status)
                         -> SetChannel('1943-b81f7a0058d1b527f8315aee1a81e2d0')
                         -> pushbear();
                     return json(['code' => '200', 'message' => '添加成功']);
