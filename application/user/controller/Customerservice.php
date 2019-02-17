@@ -227,11 +227,28 @@ class Customerservice extends Base
        $alipay = new Alipay();
        if (Request::isPut()){
             $id = Request::param('id');
+            if (!empty($id)){
+                $find = Payout::where('id',$id) -> find();
+                $result = $alipay -> AlipayTransfer($find['zhifubao'],$find['number']);
+                if ($result['code'] == 10000){
+                    $find -> zhifubao_number = $result['order_id'];
+                    $find ->  status =  2;
+                    if ($find -> save()){
+                        return json(['code' => 200 , 'message' => '转账成功，支付宝交易号：'.$result['order_id']]);
+                    }else{
+                        return json(['code' => 400 , 'message' => '转账成功，数据更新失败']);
+                    }
+                    return $result;
+                }else{
+                    return json(['code' => 400 , 'message' => $result['sub_msg']]);
+                }
 
+            }else{
+                return json(['code' => 400 , 'message' => '默认参数缺损']);
+            }
        }else{
            return $this -> error('非法访问！');
        }
-       return $alipay -> AlipayTransfer('15958558433','0.1');
     }
 
 
