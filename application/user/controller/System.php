@@ -320,12 +320,17 @@ class System extends Base
         if (Request::isPut()){
             $data= Request::param();
             if (!empty($data['id'])){
-                $find = Users::where('id',$data['id']) -> find();
-                $find -> status = $data['status'];
-                if ($find ->save()){
-                    return json(['code' => 200]);
+
+                if ($data['id'] == 1){
+                    return json(['code' => 400 , 'message' => '系统管理员不可停用']);
                 }else{
-                    return json(['code' => 400 , 'message' => '修改失败！']);
+                    $find = Users::where('id',$data['id']) -> find();
+                    $find -> status = $data['status'];
+                    if ($find ->save()){
+                        return json(['code' => 200]);
+                    }else{
+                        return json(['code' => 400 , 'message' => '修改失败！']);
+                    }
                 }
             }else{
                 return $this -> error("接受默认参数失败！");
