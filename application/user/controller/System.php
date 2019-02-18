@@ -300,21 +300,14 @@ class System extends Base
     public function EditUser(){
         if (Request::isPut()){
             if (!empty(Request::param('username'))){
-                    $find = Users::where('username',Request::param('username')) -> find();
-                    $find -> password = hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2);
-                    $find -> mobile = Request::param('mobile');
-                    $find -> mail = Request::param('mail');
-                    if ($find -> save()){
-                        $role = UserAccess::where('uid',$find['id']) ->find();
-                        $role -> group_id = Request::param('role');
-                        if ($role -> save()){
-                            return json(['code' => 200 , 'message' => '更新成功！']);
-                        }else{
-                            return json(['code' => 400 , 'message' => '更新失败！']);
-                        }
-                    }else{
-                        return json(['code' => 400 , 'message' => '更新失败！']);
-                    }
+                $find = Users::where('username',Request::param('username')) -> find();
+                $role = UserAccess::where('uid',$find['id']) ->find();
+                $role -> group_id = Request::param('role');
+                if ($role -> save()){
+                    return json(['code' => 200 , 'message' => '更新成功！']);
+                }else{
+                    return json(['code' => 400 , 'message' => '更新失败！']);
+                }
             }else{
                 return json(['code' => 400 , 'message' => '接受默认参数失败！']);
             }
