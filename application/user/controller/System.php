@@ -306,7 +306,7 @@ class System extends Base
                     $find -> mail = Request::param('mail');
                     if ($find -> save()){
                         $role = UserAccess::where('uid',$find['id']) ->find();
-                        $role -> group_id = $find['role'];
+                        $role -> group_id = Request::param('role');
                         if ($role -> save()){
                             return json(['code' => 200 , 'message' => '更新成功！']);
                         }else{
