@@ -420,4 +420,23 @@ class System extends Base
         }
     }
 
+    //删除角色
+    public function DelRole(){
+        if (Request::isDelete()){
+            $id = Request::param('id');
+            if (!empty($id)){
+                $role = Role::where('id',$id);
+                if ($role -> delete()){
+                    return json(['code' => 200 , 'message' => '操作成功，角色已删除！']);
+                }else{
+                    return json(['code' => 400 , 'message' => '操作失败，角色未删除，请重试！']);
+                }
+            }else{
+                return $this -> error('未接收到实际参数！');
+            }
+        }else{
+            return $this -> error('系统错误！');
+        }
+    }
+
 }
