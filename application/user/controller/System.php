@@ -14,6 +14,7 @@ use app\user\command\Base;
 use app\user\model\Role;
 use app\user\model\Rule;
 use app\user\model\UserAccess;
+use think\Exception;
 use think\facade\Request;
 use think\Validate;
 use think\facade\Session;
@@ -21,6 +22,10 @@ use think\facade\Session;
 class System extends Base
 {
     protected $middleware = ['\app\http\middleware\Check'];
+
+    public function index(){
+        return $this -> error('Not Found');
+    }
 
     //管理员列表
     public function UserList(){
@@ -295,6 +300,7 @@ class System extends Base
     public function EditUser(){
         if (Request::isPut()){
 
+
         }elseif(Request::isGet()){
             $id = Request::param('id');
             if (!empty($id)){
@@ -306,6 +312,26 @@ class System extends Base
             }
         }else{
 
+        }
+    }
+
+    //停用成员
+    public function ChangeUserStatus(){
+        if (Request::isPut()){
+            $data= Request::param();
+            if (!empty($data['id'])){
+                $find = Users::where('id',$data['id']) -> find();
+                $find -> status = $data['status'];
+                if ($find ->save()){
+                    return json(['code' => 200]);
+                }else{
+                    return json(['code' => 400 , 'message' => '修改失败！']);
+                }
+            }else{
+                return $this -> error("接受默认参数失败！");
+            }
+        }else{
+            return $this -> error('该请求不被支持！');
         }
     }
 

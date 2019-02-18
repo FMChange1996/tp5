@@ -16,7 +16,7 @@ class Users extends Model
     public function getStatusAttr($value){
         $status = [
             '0' => '已启用',
-            '1' => '已禁用'
+            '1' => '已停用'
         ];
         return $status[$value];
     }
