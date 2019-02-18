@@ -94,7 +94,7 @@ class System extends Base
     public function AddRole(){
         if (Request::isPost()){
             if (!Request::param('role')){
-                return json(['code' => 400, 'message' => '权限必须选择']);
+                return json(['code' => 400, 'message' => '角色权限未选择']);
             }else {
                 $data = Request::param();
                 $data = [
@@ -378,36 +378,39 @@ class System extends Base
     //编辑角色权限
     public function EditRole(){
         if (Request::isPut()){
-            $data = Request::param();
-            $data = [
-                'roleName' => $data['roleName'],
-                'text' => $data['text'],
-                'status' => $data['status'],
-                'role' => $data['role']
-            ];
-            $message = [
-                'roleName.require' => '角色名不能为空',
-                'role.require' => '角色权限必须选择',
-                'status.require' => '状态必须选择'
-            ];
-            $validate = Validate::make([
-                'roleName' => 'require',
-                'role' => 'require',
-                'status' => 'require'
-            ], $message);
-            if (!$validate->check($data)) {
-                return json(['code' => 400, 'message' => $validate->getError()]);
-            } else {
-                $role = Role::where('title',$data['roleName']) -> find();
-                $role -> rules = implode(',',$data['role']);
-                $role -> status = $data['status'];
-                if ($role->save()){
-                    return json(['code' => 200, 'message' => '角色权限修改成功！']);
-                }else{
-                    return json(['code' => 400, 'message' => '角色权限修改失败！']);
+            if (！Request::param('role')){
+                return json(['code' => 400, 'message' => '角色权限未选择!']);
+            }else {
+                $data = Request::param();
+                $data = [
+                    'roleName' => $data['roleName'],
+                    'text' => $data['text'],
+                    'status' => $data['status'],
+                    'role' => $data['role']
+                ];
+                $message = [
+                    'roleName.require' => '角色名不能为空',
+                    'role.require' => '角色权限必须选择',
+                    'status.require' => '状态必须选择'
+                ];
+                $validate = Validate::make([
+                    'roleName' => 'require',
+                    'role' => 'require',
+                    'status' => 'require'
+                ], $message);
+                if (!$validate->check($data)) {
+                    return json(['code' => 400, 'message' => $validate->getError()]);
+                } else {
+                    $role = Role::where('title', $data['roleName'])->find();
+                    $role->rules = implode(',', $data['role']);
+                    $role->status = $data['status'];
+                    if ($role->save()) {
+                        return json(['code' => 200, 'message' => '角色权限修改成功！']);
+                    } else {
+                        return json(['code' => 400, 'message' => '角色权限修改失败！']);
+                    }
                 }
             }
-
         }elseif (Request::isGet()){
             if (!empty(Request::param('id'))){
                 $vo = Role::where('id',Request::param('id')) -> find();

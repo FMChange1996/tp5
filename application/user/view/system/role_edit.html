@@ -71,15 +71,15 @@
         var check_val = [];
         $("input[name='role']:checked").each(function(i){
             check_val[i] =$(this).val();
-        });
+        })
         $.ajax({
             url:'{:url('/user/system/editrole')}',
             type:'PUT',
             data:{
-                'roleName':$('#roleName').val(),
-                'text':$('#text').val(),
-                'status':$('#status').val(),
-                'role':check_val
+                roleName:$('#roleName').val(),
+                text:$('#text').val(),
+                status:$('#status').val(),
+                role:check_val
             },
             dataType:'json',
             success:function (response) {

@@ -76,10 +76,10 @@
             url:'{:url('/user/system/addrole')}',
             type:'post',
             data:{
-                'roleName':$('#roleName').val(),
-                'text':$('#text').val(),
-                'status':$('#status').val(),
-                'role':check_val
+                roleName:$('#roleName').val(),
+                text:$('#text').val(),
+                status:$('#status').val(),
+                role:check_val
             },
             dataType:'json',
             success:function (response) {
