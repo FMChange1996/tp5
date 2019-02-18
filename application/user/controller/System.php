@@ -322,14 +322,14 @@ class System extends Base
             if (!empty($data['id'])){
 
                 if ($data['id'] == 1){
-                    return json(['code' => 400 , 'message' => '系统管理员不可停用']);
+                    return json(['code' => 1 , 'message' => '系统管理员不可停用']);
                 }else{
                     $find = Users::where('id',$data['id']) -> find();
                     $find -> status = $data['status'];
                     if ($find ->save()){
-                        return json(['code' => 200]);
+                        return json(['code' => 0]);
                     }else{
-                        return json(['code' => 400 , 'message' => '修改失败！']);
+                        return json(['code' => 1 , 'message' => '修改失败！']);
                     }
                 }
             }else{

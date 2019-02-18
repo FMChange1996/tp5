@@ -90,7 +90,7 @@
                 },
                 dataType:'json',
                 success:function (response) {
-                    if (response.code = 200 ){
+                    if (response.code = 0 ){
                         $(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
                         $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
                         $(obj).remove();
@@ -116,7 +116,7 @@
                 },
                 dataType:'json',
                 success:function (response) {
-                    if (response.code = 200 ){
+                    if (response.code = 0 ){
                         $(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
                         $(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">已禁用</span>');
                         $(obj).remove();
