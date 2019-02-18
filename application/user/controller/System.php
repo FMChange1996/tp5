@@ -357,4 +357,13 @@ class System extends Base
         }
     }
 
+    //删除成员
+    public function DeleteUser(){
+        if (Request::isDelete()){
+            $id = Request::param('id');
+        }else{
+            return $this -> error('非法请求！');
+        }
+    }
+
 }
