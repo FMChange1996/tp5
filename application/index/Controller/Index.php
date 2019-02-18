@@ -33,13 +33,17 @@ class Index extends Controller
             $password = hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2);
             $data = Users::where('username',$username) -> find();
             if ($data['username'] == $username && $data['password'] == $password){
-                Session::set('uid',$data['id']);
-                Session::set('token','dcn3ocqe2mroqw23r0');
-                Session::set('username',$username);
-                $group = UserAccess::where('uid',$data['id']) -> find();
-                $name = Role::where('id',$group['group_id']) -> find();
-                Session::set('group',$name['title']);
-                return ['code' => 200 , 'message' => '登录成功'];
+                if ($data['status'] == '已停用'){
+                    return json(['code' => 400 , 'message' => '该账号已被管理员停用！']);
+                }else{
+                    Session::set('uid',$data['id']);
+                    Session::set('token','dcn3ocqe2mroqw23r0');
+                    Session::set('username',$username);
+                    $group = UserAccess::where('uid',$data['id']) -> find();
+                    $name = Role::where('id',$group['group_id']) -> find();
+                    Session::set('group',$name['title']);
+                    return ['code' => 200 , 'message' => '登录成功'];
+                }
             }elseif ($data == null){
                 return ['code' => 400 , 'message' => '该用户不存在！'];
             }elseif ($data['username'] == $username && $data['password'] != $password){
