@@ -315,7 +315,7 @@ class System extends Base
         }
     }
 
-    //停用成员
+    //改变成员状态
     public function ChangeUserStatus(){
         if (Request::isPut()){
             $data= Request::param();
