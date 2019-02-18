@@ -8,7 +8,7 @@
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>登录名：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" id="username" name="username">
+                <input type="text" class="input-text" id="username" name="username" readonly="readonly" value="{$vo.username}">
             </div>
         </div>
         <div class="row clearfix">
@@ -20,13 +20,13 @@
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>手机号：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" id="mobile" name="mobile" >
+                <input type="text" class="input-text" id="mobile" name="mobile" value="{$vo.mobile}">
             </div>
         </div>
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>邮箱：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                <input type="email" class="input-text" id="mail" name="mail" >
+                <input type="email" class="input-text" id="mail" name="mail" value="{$vo.mail}">
             </div>
         </div>
         <div class="row clearfix">
@@ -38,18 +38,6 @@
                         {volist name="role" id="vo"}
                         <option value="{$vo.id}">{$vo.title}</option>
                         {/volist}
-                    </select>
-                </span>
-            </div>
-        </div>
-        <div class="row clearfix">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>启用类型：</label>
-            <div class="form-controls col-xs-8 col-sm-9">
-                <span class="select-box">
-                    <select class="select" name="status">
-                        <option selected>选择</option>
-                        <option value="0">启用</option>
-                        <option value="1">禁用</option>
                     </select>
                 </span>
             </div>
@@ -70,7 +58,7 @@
     $('#submit').on('click',function () {
         $.ajax({
             url:'{:url('/User/System/EditUser')}',
-            type:'post',
+            type:'PUT',
             data:$('#rule_add').serialize(),
             dataType:'json',
             success:function (response) {
