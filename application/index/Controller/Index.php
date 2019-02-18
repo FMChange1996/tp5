@@ -33,7 +33,7 @@ class Index extends Controller
             $password = hash_pbkdf2("sha256",Request::param('password'),"mukebuyi",2);
             $data = Users::where('username',$username) -> find();
             if ($data['username'] == $username && $data['password'] == $password){
-                if ($data['status'] == '已停用'){
+                if ($data['status'] == 1){
                     return json(['code' => 400 , 'message' => '该账号已被管理员停用！']);
                 }else{
                     Session::set('uid',$data['id']);
