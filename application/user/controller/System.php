@@ -435,4 +435,23 @@ class System extends Base
         }
     }
 
+    //删除权限
+    public function DelRule(){
+        if (Request::isDelete()){
+            $id = Request::param('id');
+            if (!empty($id)){
+                $rule = Rule::where('id',$id);
+                if ($rule -> delete()){
+                    return json(['code' => 200 , 'message' => '操作成功，该权限已删除！']);
+                }else{
+                    return json(['code' => 400 , 'message' => '操作失败，该权限未被删除，请重试！']);
+                }
+            }else{
+                return json(['code' => 400 , 'message' => '未接收到默认参数！']);
+            }
+        }else{
+            return $this -> error('非法访问！');
+        }
+    }
+
 }
