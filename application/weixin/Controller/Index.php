@@ -5,9 +5,7 @@
  * Date: 2019/1/24
  * Time: 17:09
  */
-
-namespace app\Weixin\Controller;
-
+namespace app\weixin\controller;
 
 use think\Controller;
 
