@@ -251,5 +251,15 @@ class Customerservice extends Base
        }
     }
 
+    public function EditPayout(){
+        if (Request::isGet()){
+
+        }elseif (Request::isPut()){
+
+        }else{
+            
+        }
+    }
+
 
 }
