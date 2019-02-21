@@ -257,7 +257,7 @@ class Customerservice extends Base
         }elseif (Request::isPut()){
 
         }else{
-            
+            return $this -> error('非法访问！');
         }
     }
 
