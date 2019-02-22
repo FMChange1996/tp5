@@ -42,6 +42,12 @@ class Index extends Controller
                     $group = UserAccess::where('uid',$data['id']) -> find();
                     $name = Role::where('id',$group['group_id']) -> find();
                     Session::set('group',$name['title']);
+                    Session::set('ip',$data['ip']);
+                    Session::set('last_login',$data['last_login']);
+                    Users::where('username',$username) -> update([
+                        'ip' => $_SERVER['REMOTE_ADDR'],
+                        'last_login' => time()
+                    ]);
                     return ['code' => 200 , 'message' => '登录成功'];
                 }
             }elseif ($data == null){

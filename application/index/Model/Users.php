@@ -13,6 +13,7 @@ use think\Model;
 
 class Users extends Model
 {
+
     public function getStatusAttr($value){
         $status = [
             '0' => '已启用',
