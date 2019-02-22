@@ -8,6 +8,7 @@
 
 namespace app\User\controller;
 
+use app\index\model\Users;
 use app\user\model\Orders;
 use app\user\model\After;
 use app\user\model\Payout;
@@ -22,7 +23,12 @@ class Index extends Controller
         $orders_count = Orders::where('status',0) -> count();
         $customer_count = After::where('status',0) -> count();
         $payout_count = Payout::where('status','<',2) -> count();
-        return view('index/welcome',['title' => '首页' , 'order_count' => $orders_count , 'after_count' => $customer_count ,'pay_count'  => $payout_count]);
+        return view('index/welcome',[
+            'title' => '首页' ,
+            'order_count' => $orders_count ,
+            'after_count' => $customer_count ,
+            'pay_count'  => $payout_count
+        ]);
     }
 
 }

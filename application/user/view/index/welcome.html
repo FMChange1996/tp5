@@ -56,8 +56,7 @@
                 {$Think.session.username}
                     </div>
                 </p>
-                <p>登录次数：18 </p>
-                <p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>
+                <p>上次登录IP：{$Think.session.ip}  上次登录时间：{$Think.session.last_login|date="Y-m-d H:i:s"}</p>
             </div>
         </div>
     </article>
