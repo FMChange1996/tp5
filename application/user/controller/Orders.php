@@ -57,58 +57,121 @@ class Orders extends Base
     //添加订单操作
     public function Add(){
         if (Request::isPost()) {
-            $data = [
-                'name' => Request::param('name'),
-                'mobile' => Request::param('mobile'),
-                'address' => Request::param('address'),
-                'goods' => Request::param('goods'),
-                'urgent' => Request::param('urgent')
-            ];
-            $message = [
-                'name.require' => '收件人名字不能为空',
-                'mobile.require' => '收件人手机号不能为空',
-                'mobile.min' => '收件人手机号格式不正确',
-                'mobile.max' => '收件人手机号格式不正确',
-                'address.require' => '收件人地址不能为空',
-                'goods.require' => '发货清单不能为空',
-                'urgent.require' => '紧急状态必须选择',
-                'urgent.integer' => '紧急状态未选择'
-            ];
-            $validate = Validate::make([
-                'name' => 'require',
-                'mobile' => 'require|min:11|max:12',
-                'address' => 'require',
-                'goods' => 'require',
-                'urgent' => 'require'
-            ], $message);
-            if (!$validate->check($data)) {
-                return json(['code' => 400, 'message' => $validate->getError()]);
-            } else {
-                $order = new OrdersModel([
-                    'order_id' => date('YmdHi') . rand(10000, 99999),
-                    'name' => $data['name'],
-                    'mobile' => $data['mobile'],
-                    'address' => $data['address'],
-                    'goods' => $data['goods'],
-                    'urgent' => $data['urgent'],
-                    'status' => 0,
-                    'create' => session('username'),
-                    'create_time' => time()
-                ]);
-                if ($order->save()) {
-                    if ($order['urgent'] == "正常"){
-                        $status = "正常";
-                    }else{
-                        $status = "加急";
-                    }
-                    $push = new Seven();
-                    $push -> SetTitle($order['order_id'])
-                        -> SetMessage("收件人名字：".$order['name']."\n\n收件人电话：".$order['mobile']."\n\n收件人地址：".$order['address']."\n\n发货清单：".$order['goods']."\n\n订单状态：".$status)
-                        -> SetChannel('1943-b81f7a0058d1b527f8315aee1a81e2d0')
-                        -> pushbear();
-                    return json(['code' => '200', 'message' => '添加成功']);
+            $type = Request::param('type');
+            if ($type == 0){
+                $data = [
+                    'name' => Request::param('name'),
+                    'mobile' => Request::param('mobile'),
+                    'address' => Request::param('address'),
+                    'goods' => Request::param('goods'),
+                    'urgent' => Request::param('urgent')
+                ];
+                $message = [
+                    'name.require' => '收件人名字不能为空',
+                    'mobile.require' => '收件人手机号不能为空',
+                    'mobile.min' => '收件人手机号格式不正确',
+                    'mobile.max' => '收件人手机号格式不正确',
+                    'address.require' => '收件人地址不能为空',
+                    'goods.require' => '发货清单不能为空',
+                    'urgent.require' => '紧急状态必须选择',
+                    'urgent.integer' => '紧急状态未选择'
+                ];
+                $validate = Validate::make([
+                    'name' => 'require',
+                    'mobile' => 'require|min:11|max:12',
+                    'address' => 'require',
+                    'goods' => 'require',
+                    'urgent' => 'require'
+                ], $message);
+                if (!$validate->check($data)) {
+                    return json(['code' => 400, 'message' => $validate->getError()]);
                 } else {
-                    return json(['code' => '500', 'message' => '添加失败']);
+                    $check = OrdersModel::where('name',$data['name']) -> find();
+                    if ($check['name'] == $data['name']){
+                        return json(['code' => 400 , 'message' => '该收件人已存在！']);
+                    }else{
+                        $order = new OrdersModel([
+                            'order_id' => date('YmdHi') . rand(10000, 99999),
+                            'name' => $data['name'],
+                            'mobile' => $data['mobile'],
+                            'address' => $data['address'],
+                            'goods' => $data['goods'],
+                            'urgent' => $data['urgent'],
+                            'status' => 0,
+                            'create' => session('username'),
+                            'create_time' => time()
+                        ]);
+                        if ($order->save()) {
+                            if ($order['urgent'] == "正常"){
+                                $status = "正常";
+                            }else{
+                                $status = "加急";
+                            }
+                            $push = new Seven();
+                            $push -> SetTitle($order['order_id'])
+                                -> SetMessage("收件人名字：".$order['name']."\n\n收件人电话：".$order['mobile']."\n\n收件人地址：".$order['address']."\n\n发货清单：".$order['goods']."\n\n订单状态：".$status)
+                                -> SetChannel('1943-b81f7a0058d1b527f8315aee1a81e2d0')
+                                -> pushbear();
+                            return json(['code' => '200', 'message' => '添加成功']);
+                        } else {
+                            return json(['code' => '500', 'message' => '添加失败']);
+                        }
+                    }
+                }
+            }else{
+                $data = [
+                    'name' => Request::param('name'),
+                    'mobile' => Request::param('mobile'),
+                    'address' => Request::param('address'),
+                    'goods' => Request::param('goods'),
+                    'urgent' => Request::param('urgent')
+                ];
+                $message = [
+                    'name.require' => '收件人名字不能为空',
+                    'mobile.require' => '收件人手机号不能为空',
+                    'mobile.min' => '收件人手机号格式不正确',
+                    'mobile.max' => '收件人手机号格式不正确',
+                    'address.require' => '收件人地址不能为空',
+                    'goods.require' => '发货清单不能为空',
+                    'urgent.require' => '紧急状态必须选择',
+                    'urgent.integer' => '紧急状态未选择'
+                ];
+                $validate = Validate::make([
+                    'name' => 'require',
+                    'mobile' => 'require|min:11|max:12',
+                    'address' => 'require',
+                    'goods' => 'require',
+                    'urgent' => 'require'
+                ], $message);
+                if (!$validate->check($data)) {
+                    return json(['code' => 400, 'message' => $validate->getError()]);
+                } else {
+                    $order = new OrdersModel([
+                        'order_id' => date('YmdHi') . rand(10000, 99999),
+                        'name' => $data['name'],
+                        'mobile' => $data['mobile'],
+                        'address' => $data['address'],
+                        'goods' => $data['goods'],
+                        'urgent' => $data['urgent'],
+                        'status' => 0,
+                        'create' => session('username'),
+                        'create_time' => time()
+                    ]);
+                    if ($order->save()) {
+                        if ($order['urgent'] == "正常"){
+                            $status = "正常";
+                        }else{
+                            $status = "加急";
+                        }
+                        $push = new Seven();
+                        $push -> SetTitle($order['order_id'])
+                            -> SetMessage("收件人名字：".$order['name']."\n\n收件人电话：".$order['mobile']."\n\n收件人地址：".$order['address']."\n\n发货清单：".$order['goods']."\n\n订单状态：".$status)
+                            -> SetChannel('1943-b81f7a0058d1b527f8315aee1a81e2d0')
+                            -> pushbear();
+                        return json(['code' => '200', 'message' => '添加成功']);
+                    } else {
+                        return json(['code' => '500', 'message' => '添加失败']);
+                    }
                 }
             }
         } else {
