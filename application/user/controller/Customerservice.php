@@ -27,7 +27,7 @@ class Customerservice extends Base
     }
 
     public function PayOut(){
-        $list = Payout::paginate(10);
+        $list = Payout::paginate(15);
         return view('customerservice/pay_out',['title' => '售后支出','list' => $list , 'count' => $list -> count()]);
     }
 
