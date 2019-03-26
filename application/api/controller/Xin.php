@@ -3,16 +3,17 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2019/2/12
- * Time: 14:27
+ * Time: 14:49
  */
 
-namespace app\api\Controller;
+namespace app\api\controller;
 
 
 use think\Controller;
 use think\facade\Request;
+use HttpClient;
 
-class Hai extends Controller
+class Xin extends Controller
 {
     public function index(){
         $parameter = Request::param('parameter');

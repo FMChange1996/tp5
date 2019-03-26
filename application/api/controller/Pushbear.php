@@ -6,7 +6,7 @@
  * Time: 22:11
  */
 
-namespace app\Api\Controller;
+namespace app\Api\controller;
 
 use Seven;
 

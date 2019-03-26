@@ -6,7 +6,7 @@
  * Time: 22:23
  */
 
-namespace app\Api\Controller;
+namespace app\Api\controller;
 
 use GeetestLib;
 use think\Controller;
